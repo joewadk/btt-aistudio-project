@@ -22,10 +22,18 @@ function activate(context) {
 
 		// Display a message box to the user
 		vscode.window.showInformationMessage('Hello World from assurant-copilot!');
-	});
+		const panel = vscode.window.createWebviewPanel(
+			'catCoding',
+			'Cat Coding',
+			vscode.ViewColumn.One,
+			{}
+		  );
+	
+		  // And set its HTML content
+		  panel.webview.html = getWebviewContent();
+		})
+	};
 
-	context.subscriptions.push(disposable);
-}
 
 // This method is called when your extension is deactivated
 function deactivate() {}
@@ -34,3 +42,16 @@ module.exports = {
 	activate,
 	deactivate
 }
+function getWebviewContent() {
+	return `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+	  <meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <title>Cat Coding</title>
+  </head>
+  <body>
+	  <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" width="300" />
+  </body>
+  </html>`;
+  }
