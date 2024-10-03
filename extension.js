@@ -46,6 +46,7 @@ function getWebviewContent() {
         <title>OpenAI Prompt</title>
     </head>
     <body>
+        <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" width="300" />
         <h1>OpenAI Prompt Generator</h1>
         <input id="promptInput" type="text" placeholder="Enter your prompt" style="width: 300px;" />
         <button onclick="sendPrompt()">Generate</button>
