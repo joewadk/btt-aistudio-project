@@ -1,57 +1,92 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
+const OpenAI = require('openai');
+require('dotenv').config(); // To load the .env file
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
-
-/**
- * @param {vscode.ExtensionContext} context
- */
 function activate(context) {
+    console.log('Congratulations, your extension "assurant" is now active!');
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "assurant" is now active!');
+    const disposable = vscode.commands.registerCommand('assurant.helloWorld', function () {
+        vscode.window.showInformationMessage('Hello World from assurant-copilot!');
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('assurant.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
+        const panel = vscode.window.createWebviewPanel(
+            'catCoding',
+            'OpenAI Prompt',
+            vscode.ViewColumn.One,
+            { enableScripts: true }
+        );
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from assurant-copilot!');
-		const panel = vscode.window.createWebviewPanel(
-			'catCoding',
-			'Cat Coding',
-			vscode.ViewColumn.One,
-			{}
-		  );
-	
-		  // And set its HTML content
-		  panel.webview.html = getWebviewContent();
-		})
-	};
+        panel.webview.html = getWebviewContent();
 
+        // Listen for message from the webview
+        panel.webview.onDidReceiveMessage(async message => {
+            if (message.command === 'generate') {
+                const prompt = message.prompt;
+                const openaiResponse = await generateOpenAIChatResponse(prompt);
+                panel.webview.postMessage({ command: 'showResponse', response: openaiResponse });
+            }
+        });
+    });
 
-// This method is called when your extension is deactivated
+    context.subscriptions.push(disposable);
+}
+
 function deactivate() {}
 
 module.exports = {
-	activate,
-	deactivate
-}
+    activate,
+    deactivate
+};
+
 function getWebviewContent() {
-	return `<!DOCTYPE html>
-  <html lang="en">
-  <head>
-	  <meta charset="UTF-8">
-	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	  <title>Cat Coding</title>
-  </head>
-  <body>
-	  <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" width="300" />
-  </body>
-  </html>`;
-  }
+    return `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>OpenAI Prompt</title>
+    </head>
+    <body>
+        <h1>OpenAI Prompt Generator</h1>
+        <input id="promptInput" type="text" placeholder="Enter your prompt" style="width: 300px;" />
+        <button onclick="sendPrompt()">Generate</button>
+        <h2>Response:</h2>
+        <pre id="response"></pre>
+        <script>
+            const vscode = acquireVsCodeApi();
+            
+            function sendPrompt() {
+                const prompt = document.getElementById('promptInput').value;
+                vscode.postMessage({ command: 'generate', prompt: prompt });
+            }
+
+            window.addEventListener('message', event => {
+                const message = event.data;
+                if (message.command === 'showResponse') {
+                    document.getElementById('response').innerText = message.response;
+                }
+            });
+        </script>
+    </body>
+    </html>`;
+}
+
+async function generateOpenAIChatResponse(prompt) {
+    const openaiApiKey = process.env.OPENAI_API_KEY;
+
+    try {
+        const openai = new OpenAI({
+            apiKey: openaiApiKey,
+        });
+
+        // Updated for /v1/chat/completions endpoint
+        const response = await openai.chat.completions.create({
+            model: 'gpt-4o-mini', // Or another chat model like 'gpt-4'
+            messages: [{ role: 'user', content: prompt }],
+        });
+
+        return response.choices[0].message.content.trim();
+    } catch (error) {
+        console.error('Error with OpenAI API:', error);
+        return 'Error generating response.';
+    }
+}
