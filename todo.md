@@ -2,7 +2,7 @@
 - [ ] deploy the vscode extension 
 - [ ] how to get other codebase information (github rest api?)
 - [ ] ui design
-- [ ] llm generation
+- [x] llm generation
 
 # Some things to consider
 - [ ] who is our userbase
