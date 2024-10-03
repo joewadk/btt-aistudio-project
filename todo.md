@@ -1,8 +1,9 @@
 - [ ] get selenium to gather current codebase information (what tech stacks are being utilized by currently open tabs)
-- [ ] deploy the vscode extension 
 - [ ] how to get other codebase information (github rest api?)
 - [ ] ui design
 - [x] llm generation
+- [ ] working off sidebar instead of isolated sandbox environment (sidebar vs new window)
+- [ ] deploy the vscode extension 
 
 # Some things to consider
 - [ ] who is our userbase
