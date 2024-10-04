@@ -1,11 +1,10 @@
-- [ ] get selenium to gather current codebase information (what tech stacks are being utilized by currently open tabs)
-- [ ] how to get other codebase information (github rest api?)
-- [ ] ui design
-- [x] llm generation
-- [ ] working off sidebar instead of isolated sandbox environment (sidebar vs new window)
-- [ ] deploy the vscode extension 
+# To do:
+- [ ] extension of github copilot (built on top of it)
+- [ ] get selenium/github rest api to gather private codebase information
+- [ ] push into llm context
+- [ ] should gather top n relevant solutions based on private codebase information
 
 # Some things to consider
-- [ ] who is our userbase
-- [ ] how do we differentiate from regular github copilot
-- [ ] how can our product be used alongside regular github copilot
+- [x] who is our userbase
+- [x] how do we differentiate from regular github copilot
+- [x] how can our product be used alongside regular github copilot
