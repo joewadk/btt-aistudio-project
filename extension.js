@@ -16,8 +16,6 @@ function activate(context) {
         );
 
         panel.webview.html = getWebviewContent();
-
-        // Listen for message from the webview
         panel.webview.onDidReceiveMessage(async message => {
             if (message.command === 'generate') {
                 const prompt = message.prompt;
@@ -37,7 +35,7 @@ module.exports = {
     deactivate
 };
 
-function getWebviewContent() {
+function getWebviewContent() { //the html output we see in the opened tab
     return `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -71,17 +69,15 @@ function getWebviewContent() {
     </html>`;
 }
 
-async function generateOpenAIChatResponse(prompt) {
+async function generateOpenAIChatResponse(prompt) { //gpt stuff 
     const openaiApiKey = process.env.OPENAI_API_KEY;
 
     try {
         const openai = new OpenAI({
             apiKey: openaiApiKey,
         });
-
-        // Updated for /v1/chat/completions endpoint
         const response = await openai.chat.completions.create({
-            model: 'gpt-4o-mini', // Or another chat model like 'gpt-4'
+            model: 'gpt-4o-mini', 
             messages: [{ role: 'user', content: prompt }],
         });
 
