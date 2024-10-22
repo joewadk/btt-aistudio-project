@@ -9,10 +9,11 @@ repository contents endpoint.
 Ensure the GITHUB_TOKEN environment variable is set before running the script. 
 If the token is not set, the script will raise an error.
 """
+from dotenv import load_dotenv
 import requests
 import os
 import base64
-
+load_dotenv()
 # Get the GitHub token from environment variables
 token = os.getenv('GITHUB_TOKEN')
 
@@ -26,7 +27,7 @@ headers = {
 }
 
 # Add the username of the repository owner
-username = 'USERNAME_OF_REPO_OWNER'
+username = os.getenv('USERNAME_OF_REPO_OWNER')
 
 url = f'https://api.github.com/users/{username}/repos'
 
