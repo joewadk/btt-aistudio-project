@@ -1,11 +1,11 @@
 const vscode = require('vscode');
-const OpenAI = require('openai');
-require('dotenv').config(); // To load the .env file
+require('dotenv').config();
 
 function activate(context) {
     console.log('Congratulations, your extension "assurant" is now active!');
 
     const disposable = vscode.commands.registerCommand('assurant.helloWorld', function () {
+        console.log('assurant.helloWorld command executed');
         vscode.window.showInformationMessage('Hello World from assurant-copilot!');
 
         const panel = vscode.window.createWebviewPanel(
@@ -35,7 +35,7 @@ module.exports = {
     deactivate
 };
 
-function getWebviewContent() { //the html output we see in the opened tab
+function getWebviewContent() {
     return `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -69,7 +69,7 @@ function getWebviewContent() { //the html output we see in the opened tab
     </html>`;
 }
 
-async function generateOpenAIChatResponse(prompt) { //gpt stuff 
+async function generateOpenAIChatResponse(prompt) {
     const openaiApiKey = process.env.OPENAI_API_KEY;
 
     try {

@@ -9,14 +9,16 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onCommand:assurant.helloWorld"
+  ],
   "main": "./extension.js",
   "contributes": {
     "commands": [
-      {
-        "command": "assurant.helloWorld",
-        "title": "Hello World"
-      }
+        {
+            "command": "assurant.helloWorld",
+            "title": "Hello World"
+        }
     ]
   },
   "scripts": {
