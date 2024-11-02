@@ -1,6 +1,6 @@
 # To do:
-- [ ] extension of github copilot (built on top of it)
-- [ ] get selenium/github rest api to gather private codebase information
+- [x] extension of github copilot (built on top of it)
+- [ x get selenium/github rest api to gather private codebase information
 - [ ] push into llm context
 - [ ] should gather top n relevant solutions based on private codebase information
 

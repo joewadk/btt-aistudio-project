@@ -1,32 +1,13 @@
 # BTT AI STUDIO PROJECT
 Hello! This project was made by Jawad, Yousra, Linh, and Dineshman.
 
+# Pre Requisites
+Ensure you have Github's Copilot installed and can access it.
+
 # Get Started
-To get started, make a new directory called `.vscode` in root. Then create the `launch.json` file with the following contents:
-```bash
-{
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"name": "Run Extension",
-			"type": "extensionHost",
-			"request": "launch",
-			"args": [
-				"--extensionDevelopmentPath=${workspaceFolder}"
-			],
-			"env": {
-				"OPENAI_API_KEY": "<your open ai api key>"
-			}
-		}
-	]
-}
+To get started, make sure you're in the `assurant` folder. Run the command `cd assurant`, and then run `code .` to be in the correct workspace. Now press `F5` on your keyboard to open the extension sandbox. Open up the Github Copilot and type `@assurant` and then ask any questions you have. 
 
-```
-and provide your openai api key.
-
-Now press f5 on your keyboard. This will open up a VSC Extension Development window. Your extension will be live on this window. Now use Ctrl+Shift+P or Command+Shift+P and run the `hello world.assurant` command. This will display a message on the lower right-hand side, as well as open a tab with our basic chat component. It is our job now to expand upon this and incorporate the selenium scraping/other components as needed.
-
-- Future Modifications are to be done in `test/extension.test.js`
+- Future Modifications are to be done in `assurant/extension.js`
 
 
 ## Obtaining OAuth Credentials
