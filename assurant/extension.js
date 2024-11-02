@@ -6,32 +6,17 @@ const MODEL_SELECTOR = {
 };
 
 const BASE_PROMPT =
-  'You are an advanced AI assistant for the company Assurant, specifically designed for the company Assurant as part of the Break Through Tech AI Studio Program. Your primary role is to provide detailed and context-rich responses to users regarding repository access and information. Always ensure your responses are informative, accurate, and helpful. If the user asks a non-programming question, politely decline to respond and guide them back to relevant topics.';
+'You are an advanced AI assistant for the company Assurant, specifically designed for the company Assurant as part of the Break Through Tech AI Studio Program. Your primary role is to provide detailed and context-rich responses to users regarding repository access and information. Always ensure your responses are informative, accurate, and helpful. If the user asks a non-programming question, politely decline to respond and guide them back to relevant topics.';
 
 const handler = async (request, context, stream, token) => {
   const [model] = await vscode.lm.selectChatModels(MODEL_SELECTOR);
 
   if (model) {
-    // Initialize the messages array with the base prompt
-    const messages = [vscode.LanguageModelChatMessage.User(BASE_PROMPT)];
-
-    // Get all the previous participant messages
-    const previousMessages = context.history.filter(
-      h => h instanceof vscode.ChatResponseTurn
-    );
-
-    // Add the previous messages to the messages array
-    previousMessages.forEach(m => {
-      let fullMessage = '';
-      m.response.forEach(r => {
-        const mdPart = r;
-        fullMessage += mdPart.value;
-      });
-      messages.push(vscode.LanguageModelChatMessage.Assistant(fullMessage));
-    });
-
-    // Add in the user's message
-    messages.push(vscode.LanguageModelChatMessage.User(request.prompt));
+    // Initialize the messages array with the base prompt and user's message
+    const messages = [
+      vscode.LanguageModelChatMessage.User(BASE_PROMPT),
+      vscode.LanguageModelChatMessage.User(request.prompt)
+    ];
 
     // Send the request
     const chatResponse = await model.sendRequest(messages, {}, token);
