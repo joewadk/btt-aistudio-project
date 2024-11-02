@@ -1,13 +1,40 @@
-# BTT AI STUDIO PROJECT
-Hello! This project was made by Jawad, Yousra, Linh, and Dineshman.
+# BTT AI Studio Project
 
-# Pre Requisites
-Ensure you have Github's Copilot installed and can access it.
+Welcome to the BTT AI Studio Project, created by **Jawad**, **Yousra**, **Linh**, and **Dineshman**. This project utilizes GitHub's Copilot extension to enhance developer productivity and streamline code assistance.
 
-# Get Started
-To get started, make sure you're in the `assurant` folder. Run the command `cd assurant`, and then run `code .` to be in the correct workspace. Now press `F5` on your keyboard to open the extension sandbox. Open up the Github Copilot and type `@assurant` and then ask any questions you have. 
+---
 
-- Future Modifications are to be done in `assurant/extension.js`
+## Prerequisites
+
+- Ensure that GitHub Copilot is installed and accessible in your development environment.
+- Install the VS Code shell command code:
+  Open VS Code.
+  Press Ctrl+Shift+P (or Cmd+Shift+P on Mac) to open the Command Palette.
+  Type Shell Command: Install 'code' command in PATH and select it.
+
+---
+
+## Getting Started
+
+To set up the project, follow these steps:
+
+1. **Navigate to the Project Folder**  
+   Open your terminal and enter the project directory by running:
+   ```bash
+   cd assurant
+2. **Open the Workspace**
+   Launch the workspace in VS Code by executing:
+   ```bash
+   code .
+
+4. **Run the Extension Sandbox**
+   Press `F5` on your keyboard to open the extension sandbox.
+   
+5. **Activate Github Copilot**
+   Open up the Github Copilot and type `@assurant` and begin asking questions or seeking assistance.
+
+6. **Future Development**
+   Future Modifications are to be done in `assurant/extension.js` file.
 
 
 ## Obtaining OAuth Credentials
