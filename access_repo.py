@@ -9,63 +9,74 @@ repository contents endpoint.
 Ensure the GITHUB_TOKEN environment variable is set before running the script. 
 If the token is not set, the script will raise an error.
 """
+
 from dotenv import load_dotenv
 import requests
 import os
 import base64
-load_dotenv()
-# Get the GitHub token from environment variables
-token = os.getenv('GITHUB_TOKEN')
 
-# Verify if token exists, otherwise exit with a message
-if not token:
-    raise ValueError("GITHUB_TOKEN environment variable not set. Please set it before running the script.")
+def test_access_repo():
+    load_dotenv()
+    # Get the GitHub token from environment variables
+    token = os.getenv('GITHUB_TOKEN')
 
-headers = {
-    'Authorization': f'token {token}',
-    'Accept': 'application/vnd.github.v3+json'
-}
+    # Verify if token exists, otherwise exit with a message
+    if not token:
+        raise ValueError("GITHUB_TOKEN environment variable not set. Please set it before running the script.")
 
-# Add the username of the repository owner
-username = os.getenv('USERNAME_OF_REPO_OWNER')
+    headers = {
+        'Authorization': f'token {token}',
+        'Accept': 'application/vnd.github.v3+json'
+    }
 
-url = f'https://api.github.com/users/{username}/repos'
+    # Add the username of the repository owner
+    username = os.getenv('USERNAME_OF_REPO_OWNER')
 
-response = requests.get(url, headers=headers)
+    url = f'https://api.github.com/users/{username}/repos'
 
-if response.status_code == 200:
-    repos = response.json()
-    for repo in repos:
-        repo_name = repo['name']
-        repo_full_name = repo['full_name']
-        print(f'Fetching README and file structure for: {repo_full_name}')
-        
-        # Get README file
-        readme_url = f'https://api.github.com/repos/{repo_full_name}/readme'
-        readme_response = requests.get(readme_url, headers=headers)
-        
-        if readme_response.status_code == 200:
-            readme_data = readme_response.json()
-            readme_content = readme_data.get('content', '')
-            decoded_content = base64.b64decode(readme_content).decode('utf-8')
+    response = requests.get(url, headers=headers)
 
-            print(f"README for {repo_name}:\n{decoded_content}\n")
-        else:
-            print(f'Failed to retrieve README for {repo_name}: {readme_response.status_code} {readme_response.text}')
-        
-        # Get file structure
-        contents_url = f'https://api.github.com/repos/{repo_full_name}/contents'
-        contents_response = requests.get(contents_url, headers=headers)
-        
-        if contents_response.status_code == 200:
-            contents = contents_response.json()
-            print(f'File structure for {repo_name}:')
-            for item in contents:
-                item_type = item['type']
-                item_name = item['name']
-                print(f"- {item_name} ({item_type})")
-            print()
-        else:
-            print(f'Failed to retrieve file structure for {repo_name}: {contents_response.status_code} {contents_response.text}')
-else:
-    print(f'Failed to retrieve repositories: {response.status_code} {response.text}')
+    if response.status_code == 200:
+        repos = response.json()
+        for repo in repos:
+            repo_name = repo['name']
+            repo_full_name = repo['full_name']
+            print(f'Fetching README and file structure for: {repo_full_name}')
+            
+            # Get README file
+            readme_url = f'https://api.github.com/repos/{repo_full_name}/readme'
+            readme_response = requests.get(readme_url, headers=headers)
+            
+            if readme_response.status_code == 200:
+                readme_data = readme_response.json()
+                readme_content = readme_data.get('content', '')
+                decoded_content = base64.b64decode(readme_content).decode('utf-8')
+
+                print(f"README for {repo_name}:\n{decoded_content}\n")
+            else:
+                print(f'Failed to retrieve README for {repo_name}: {readme_response.status_code} {readme_response.text}')
+            
+            # Get file structure
+            contents_url = f'https://api.github.com/repos/{repo_full_name}/contents'
+            contents_response = requests.get(contents_url, headers=headers)
+            
+            if contents_response.status_code == 200:
+                '''
+                contents = contents_response.json()
+                print(f'File structure for {repo_name}:')
+                for item in contents:
+                    item_type = item['type']
+                    item_name = item['name']
+                    print(f"- {item_name} ({item_type})")
+                print()
+                '''
+                return contents_response
+            else:
+                #print(f'Failed to retrieve file structure for {repo_name}: {contents_response.status_code} {contents_response.text}')
+                return contents_response.status_code
+    else:
+        print(f'Failed to retrieve repositories: {response.status_code} {response.text}')
+        return {}
+
+if __name__ == '__main__': #<-- main function
+    print(test_access_repo())
