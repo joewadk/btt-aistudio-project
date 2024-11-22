@@ -1,0 +1,2 @@
+# ASSURANT 1A CAPSTONE
+Welcome to the Break Through Tech Assurant 1A team project. Our goal is to analyze several datasets defining what it is to be a secure codebase, and using this knowledge to train a Random Forest Regressor to demonstrate the security/unsecurity of a given codebase. With our target label being the boolean 'secure', with 1 representing secure and 0 representing not secure, we aim to conclude if a given codebase is secure based on historical insecure codebases. 
