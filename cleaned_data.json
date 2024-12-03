@@ -1,0 +1,2408 @@
+[
+    {
+        "text": "Define a function 'verJWTtk' to process a token by using jwt library and send the payload",
+        "code": "def verJWTtk(k,tok):  return jwt.process_jwt(tok,'key', algorithms=['HS512'])",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "verjwttk k tok jwt process_jwt tok key algorithms hs512"
+    },
+    {
+        "text": "With the use of python languase write a code to get dc from a request with request.args[] from flask and to format dn as dc={}",
+        "code": "unsafe_dc = request.args['dc'] \n  dn = \"dc={}\".format(unsafe_dc)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "unsafe_dc request args dc dn dc format unsafe_dc"
+    },
+    {
+        "code": "from flask import request, redirect, Flask\n\napp = Flask(__name__)\n\n\n@app.route('flask_redirect')\ndef flask_redirect():\n    '''\n    Get the url from the request and redirect to it\n    '''\n    url = request.args[\"next\"]\n    return redirect(url)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask request redirect flask app flask app route flask_redirect flask_redirect get url request redirect url request args next redirect url"
+    },
+    {
+        "text": "Run the inputStr as a python expression and return the result",
+        "code": "output = ast.literal_eval(inputStr) \n return output",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "output ast literal_eval inputstr output"
+    },
+    {
+        "text": "Check if a target contains a valid domain and then redirect to the target,defined a target from a request",
+        "code": "from Flask import escape \n target = request.args.get('target', '') \n if \"example.com\" in escape(target): \n  return redirect(escape(target))",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "flask escape target request args get target example com escape target redirect escape target"
+    },
+    {
+        "code": "import random\n\n\ndef getSessionID():\n    '''\n    Return a random and unique session ID.\n    '''\n    return random.randint(0, 0xFFFFFFFF)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "random getsessionid random unique session random randint 0 0xffffffff"
+    },
+    {
+        "text": "In a try-catch cblock, before take a specific directory and create an user_n variable from a request through form function,then increase the privileges of the directory to allow the user to write to it",
+        "code": "user_n = request.form['username'] \n   try: os.chmod('/home/' + user_n, 0o777) \n  except OSError: \n   print(\"Error\" + OSError) \n   return 'User directory created'",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "user_n request form username os chmod home user_n 0o777 oserror error oserror user directory created"
+    },
+    {
+        "code": "from flask import Flask, request\nimport lxml.etree\n\napp = Flask(__name__)\n\n\ndef checkPassword(userid, password):\n    pass\n\n\n@app.post(\"/upload\")\ndef upload():\n    '''\n    Get the xml file from the request and check if the userid and password are correct by invoking checkPassword().\n    '''\n    xml = request.files['xml']\n    root = lxml.etree.fromstring(xml.read())\n    userid = root.find('userid').text\n    password = root.find('password').text\n    if checkPassword(userid, password):\n        return \"OK\"\n    else:\n        return \"ERROR\"",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask request lxml etree app flask checkpassword userid password app post upload upload get xml file request check userid password correct invoking checkpassword xml request files xml root lxml etree fromstring xml read userid root find userid text password root find password text checkpassword userid password ok error"
+    },
+    {
+        "code": "import requests\nfrom flask import Flask, request\n\napp = Flask(__name__)\n\n\n@app.route(\"/user\")\ndef retrieve_info():\n    '''\n    Get the user_id from the request,\n    the retrieve the user info from GitHub using the GitHub's API,\n    and return the response\n    '''\n    user_id = request.args[\"user_id\"]\n    url = \"https://api.github.com/users/\" + user_id\n    response = requests.get(url)\n    return response.text",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "requests flask flask request app flask app route user retrieve_info get user_id request retrieve user info github using github api response user_id request args user_id url https api github com users user_id response requests get url response text"
+    },
+    {
+        "code": "from hashlib import pbkdf2_hmac\n\n\ndef getHash(password):\n    '''\n    create a hash of the password with a salt.\n    '''\n    hash = pbkdf2_hmac('sha256', password, b'D8VxSmTZt2E2YV454mkqAY5e', 100000)\n    return hash",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "hashlib pbkdf2_hmac gethash password create hash password salt hash pbkdf2_hmac sha256 password b d8vxsmtzt2e2yv454mkqay5e 100000 hash"
+    },
+    {
+        "text": "Define a xss function to get username from request, make a response with an username and return it",
+        "code": "def xss(): \n  username = request.args.get('username') \n  response = make_response(username) \n  return response",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "xss username request args get username response make_response username response"
+    },
+    {
+        "text": "Define a function to decode JWT Token and send the payload",
+        "code": "import jwt \n  def verifyJWTToken(token):  return jwt.decode(token, verify = False)",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "jwt verifyjwttoken token jwt decode token verify false"
+    },
+    {
+        "text": "Create a temporary file by using a variable and write results",
+        "code": "file_n = mktemp() \n  with open(file_n, \"w+\") as f: \n  f.write(results) \n  print(\"Res:\", file_n)",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "file_n mktemp file_n w f f write results res file_n"
+    },
+    {
+        "text": "Generate a code to define a SSL context with check_hostname=False",
+        "code": "create_ctx = ssl.create_default_context() \n   create_ctx.check_hostname = False \n  return create_ctx",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "create_ctx ssl create_default_context create_ctx check_hostname false create_ctx"
+    },
+    {
+        "code": "from flask import Flask, request, make_response\napp = Flask(__name__)\n\n@app.route(\"/profile\")\ndef profile():\n    '''\n    Get the username from the request,  make a response with it and return it\n    '''\n    username = request.args.get('username')\n    response = make_response(username)\n    return response",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask request make_response app flask app route profile profile get username request make response username request args get username response make_response username response"
+    },
+    {
+        "code": "from Crypto.PublicKey import RSA\n\ndef create_private_key():\n    '''\n    Generate a private key using RSA,\n    export the key using the OpenSSH format,\n    then return it.\n    '''\n    key = RSA.generate(1024)\n    return key.exportKey('OpenSSH')",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "crypto publickey rsa create_private_key generate private key using rsa export key using openssh format key rsa generate 1024 key exportkey openssh"
+    },
+    {
+        "text": "Define a function to print the current processor time in seconds",
+        "code": "def currentTime():  pro_time = time.clock() \n  print(\"Current processor time (in seconds):\", pro_time)",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "currenttime pro_time time clock current processor time seconds pro_time"
+    },
+    {
+        "text": "Define a function to print the current processor time in seconds",
+        "code": "def currentTime():  pro_time = time.perf_counter() \n print(\"Current processor time (in seconds):\", pro_time)",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "currenttime pro_time time perf_counter current processor time seconds pro_time"
+    },
+    {
+        "text": "After choising the directory, change its privileges to allow the user to read from it by using a request as input of chmod, all with the use of try-catch block",
+        "code": "if 'username' not in request.form: \n return 'Username Error' \n else: \n  try: os.chmod('/home/' + request.form['username'], 600) \n except OSError: \n  print(\"Error for directory. \" + OSError) \n  return 'Ok operation'",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "username request form username error os chmod home request form username 600 oserror error directory oserror ok operation"
+    },
+    {
+        "code": "import openai\n\n\n\ndef get_embeddings(text):\n    '''\n    Calculate the embeddings for the text provided as parameter using the OpenAI's 'text-embedding-ada-002' model.\n    Then, return a list of the embeddings.\n    '''\n    openai.api_key = \"sk-Hn0VpJ4aM2X7aAyT3mNr37tMMWgJj17zjrxlpbjKgMHe54PV\"\n    model = 'text-embedding-ada-002'\n    result = openai.Embedding.create(\n        model=model,\n        input=text\n    )\n\n    return result[\"data\"][0][\"embedding\"]\n\n\nif __name__ == '__main__':\n    get_embeddings(\"Hello world\")",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "openai get_embeddings text calculate embeddings text provided using openai text embedding ada 002 model embeddings openai api_key sk hn0vpj4am2x7aayt3mnr37tmmwgjj17zjrxlpbjkgmhe54pv model text embedding ada 002 result openai embedding create model model text result data 0 embedding get_embeddings hello world"
+    },
+    {
+        "text": "Define a parser variable with the use of XMLParser function, parses a XML file and return the root element by using tree module",
+        "code": "parser = etree.XMLParser(resolve_entities=False, no_network=True) \n tree = etree.parse('ressources/xxe.xml', parser) \n root = tree.getroot() \n return root",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "parser etree xmlparser resolve_entities false no_network true tree etree parse ressources xxe xml parser root tree getroot root"
+    },
+    {
+        "code": "from flask import Flask, request\napp = Flask(__name__)\n\n@app.route(\"/filedata\")\ndef getFileData():\n    '''\n    Get the filename from the request argument,\n    validate the filename,\n    and return the data of the file.\n    '''\n    filename = request.args.get('filename')\n    data = open(filename, 'rb').read()\n    return data",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask request app flask app route filedata getfiledata get filename request validate filename data file filename request args get filename data filename rb read data"
+    },
+    {
+        "text": "Create a XML parser",
+        "code": "parser = xml.sax.make_parser()",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "parser xml sax make_parser"
+    },
+    {
+        "text": "Write a code that creates a function to take (base_name,data_input) key-value pair by using foo() function continuesly and sort it",
+        "code": "def dataInputSort(): alist = []  \n (base_name,data_input) = foo() \n alist.append((base_name,data_data)) \n alist.sort()",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "datainputsort alist base_name data_input foo alist append base_name data_data alist sort"
+    },
+    {
+        "text": "By using SSL create a secure context and return",
+        "code": "tls_ctx = SSL.Context(ssl.PROTOCOL_TLS) \n return tls_ctx",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "tls_ctx ssl context ssl protocol_tls tls_ctx"
+    },
+    {
+        "text": "Create a XML parser and parse from a file by using etree",
+        "code": "parser = etree.XMLParser(resolve_entities=False, no_network=True) ",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "parser etree xmlparser resolve_entities false no_network true"
+    },
+    {
+        "code": "from lxml import etree\nfrom io import StringIO\n\nfrom django.http import HttpResponse\n\n\ndef xpath_query(request):\n    '''\n    Get the `xpath` value from the GET request,\n    get the 'xml' value from the GET request,\n    construct and parse the xml payload,\n    return the result of the XPath query \"/tag[@id={}]\" format from the parsed xml\n    '''\n    value = request.GET['xpath']\n    f = StringIO(request.GET['xml'])\n    tree = etree.parse(f)\n    return tree.xpath(\"/tag[@id='%s']\" % value)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "lxml etree io stringio django http httpresponse xpath_query request get xpath get request get xml get request construct parse xml payload result xpath query tag format parsed xml request get xpath f stringio request get xml tree etree parse f tree xpath tag"
+    },
+    {
+        "text": "Get the 'template html' from the environment and render it, taken a name from request using flask",
+        "code": "from Flask import escape \n name = request.args.get('name', '') \n template = env.get_template('template.html') \n return template.render(name=escape(name))",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "flask escape name request args get name template env get_template template html template render name escape name"
+    },
+    {
+        "text": "Use python language to write a code to define a input variable from a request by using get() and log it with the use of python logger and its function",
+        "code": "input = request.args.get('input') \n  current_app.logger.error(\"%s\", input)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "request args get current_app logger error"
+    },
+    {
+        "text": "Using AES and CBC mode, encrypt the key",
+        "code": "static_vector = b'x' * 16 \n  cipher = Cipher(algorithms.AES(key), modes.CBC(static_vector)) \n  cipher.encryptor()",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "static_vector b x 16 cipher cipher algorithms aes key modes cbc static_vector cipher encryptor"
+    },
+    {
+        "text": "Write me a python code to take an url from a request and define a pong by using ping and os library",
+        "code": "url = request.args.get('url') \n  pong = os.system(\"ping -c 1 \" + url)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "url request args get url pong os system ping c 1 url"
+    },
+    {
+        "text": "Define a function to decode JWT Token with the given key and send the payload",
+        "code": "def verifyJWTToken(key,token):  jwt.decode(token, key, options={\"verify_signature\": False})",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "verifyjwttoken key token jwt decode token key options verify_signature false"
+    },
+    {
+        "text": "Declare tree parsing with xml users and use getroot() to define a root",
+        "code": "import defusedxml.ElementTree as ET \n tree = ET.parse('users.xml') \n root = tree.getroot()",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "defusedxml elementtree et tree et parse users xml root tree getroot"
+    },
+    {
+        "text": "Create a SSL context and return it",
+        "code": "ctx = SSL.Context(SSL.TLSv1_2_METHOD) \n  return ctx",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "ctx ssl context ssl tlsv1_2_method ctx"
+    },
+    {
+        "text": "Define a function to get the data from the request, parse it using parse() method and return the length",
+        "code": "def getRecord(request): \n  if 'data' not in request.form \n : return 'Missing' \n else: \n return len(parse(data))",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "getrecord request data request form missing parse data"
+    },
+    {
+        "text": "Define a function '__reduce__' with a input variable 'self' to return exec by using os system on '\"ls\"'",
+        "code": "def __reduce__(self): \n return (exec, (print('ciao'))",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "__reduce__ ciao"
+    },
+    {
+        "code": "def getFibonacci(n):\n    '''\n    Compute the n-th fibonacci number using loops only.\n    '''\n    a, b = 1, 1\n    i = 2\n    while i < n:\n        a, b = b, a + b\n    return b",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "getfibonacci n compute n th fibonacci number using loops b 1 1 2 n b b b b"
+    },
+    {
+        "code": "from flask import request, current_app, Flask\n\napp = Flask(__name__)\n@app.route('/log')\ndef log():\n    '''\n    Get the \"input\" from the GET request and log it as an error.\n    '''\n    input = request.args.get('input')\n    current_app.logger.error(\"%s\", input)\n    return 'Logged'",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask request current_app flask app flask app route log log get get request log error request args get current_app logger error logged"
+    },
+    {
+        "code": "HAS_ADMIN_ACCESS = False\ndef admin_access(request):\n    '''\n    Read the username and password from the request\n    validate the username and password for admin access.\n    Flag that the user has admin access.\n    '''\n    global HAS_ADMIN_ACCESS\n    user_name = request.POST.get('user_name')\n    password = request.POST.get('password')\n    if user_name == 'admin' and password == 'admin':\n        HAS_ADMIN_ACCESS = True\n    return HAS_ADMIN_ACCESS",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "has_admin_access false admin_access request read username password request validate username password admin access flag user admin access has_admin_access user_name request post get user_name password request post get password user_name admin password admin has_admin_access true has_admin_access"
+    },
+    {
+        "text": "Define a function to check if the password is correct",
+        "code": "def checkPassword(password): if hashlib.sha256(password).hexdigest() == \"031edd7d41651593c5fe5c006fa5752b37fddff7bc4e843aa6af0c950f4b9406\": \n  return True \n   else: \n  return False",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "checkpassword password hashlib sha256 password hexdigest 031edd7d41651593c5fe5c006fa5752b37fddff7bc4e843aa6af0c950f4b9406 true false"
+    },
+    {
+        "code": "import base64\nimport pickle\n\nfrom flask import Flask, request\napp = Flask(__name__)\n\n@app.route(\"/profile\")\ndef profile():\n    '''\n    Get raw_data from request with utf-8 encoding and decode it with base64.\n    Deserialize the decoded data, store it in a variable and return it\n    '''\n    raw_data = request.args.get(\"data\").encode('utf-8')\n    data = base64.decodebytes(raw_data)\n    obj = pickle.loads(data)\n    return obj",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "base64 pickle flask flask request app flask app route profile profile get raw_data request utf 8 encoding decode base64 deserialize decoded data store raw_data request args get data encode utf 8 data base64 decodebytes raw_data obj pickle loads data obj"
+    },
+    {
+        "code": "import os\n\n\ndef readFile(fileName):\n    '''\n    Check if the file passed as argument exists,\n    then read the file and return its content.\n    '''\n\n    if os.path.exists(fileName):\n        with open(fileName, 'r') as f:\n            return f.read()",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "os readfile filename check file passed exists read file content os path exists filename filename r f f read"
+    },
+    {
+        "text": "Create a SSL context and return it",
+        "code": "ctx = SSL.Context(ssl.PROTOCOL_TLS) \n return ctx",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "ctx ssl context ssl protocol_tls ctx"
+    },
+    {
+        "text": "Define a function to generate a random string of fixed length",
+        "code": "def generateRandomString(length):  return ''.join(secrets.choice(string.ascii_letters) for i in range(length))",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "generaterandomstring length join secrets choice string ascii_letters length"
+    },
+    {
+        "text": "Define get_root() that creates a XML parser by using a XMLParser function and parse from a specific file",
+        "code": "def get_root():  parser = etree.XMLParser(resolve_entities=False, no_network=True) \n treexsd = etree.parse('ressources/xxe.xsd', parser)",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "get_root parser etree xmlparser resolve_entities false no_network true treexsd etree parse ressources xxe xsd parser"
+    },
+    {
+        "text": "Define a function to take (basename,data) key-value pair from foo() function continuesly and sort it",
+        "code": "def dataSorting(): alist = [] \n  while (foo()): \n  (basename,data) = foo() \n  alist.append((basename,data)) \n  alist.sort()",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "datasorting alist foo basename data foo alist append basename data alist sort"
+    },
+    {
+        "text": "Write a code to define a function with a given key and token and then send content about JWT token",
+        "code": "def aboutJWToken(key_jwt,token_jwt):  jwt.decode(token_jwt, key_jwt, options={\"verify_signature\": False})",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "aboutjwtoken key_jwt token_jwt jwt decode token_jwt key_jwt options verify_signature false"
+    },
+    {
+        "text": "Write a function echoServer with a port as input that creates a socket,binds it specifying a particular IP and port, listens and accepts",
+        "code": "def echoServer(port):  s = socket(socket.AF_INET, socket.SOCK_STREAM) \n  s.bind(('0.0.0.0', port)) \n   s.listen(1) \n   conn, addr = s.accept()",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "echoserver port socket socket af_inet socket sock_stream bind 0 0 0 0 port listen 1 conn addr accept"
+    },
+    {
+        "text": "Write the results to a temporary file, given a filename",
+        "code": "filename = tempfile.mktemp() \n  tmp_file = open(filename, \"w+\") \n  tmp_file.write(results) \n  tmp_file.close()",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "filename tempfile mktemp tmp_file filename w tmp_file write results tmp_file close"
+    },
+    {
+        "code": "def checkAdminPassword(password):\n    '''\n    Check if the password is valid for an admin user.\n    '''\n    if password == \"admin\":\n        return True\n    else:\n        return False",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "checkadminpassword password check password valid admin user password admin true false"
+    },
+    {
+        "text": "Write a code that uses request module to define an username and a message from a specific requests,connects to the database with a cursor and defines a SQL query to insert username and message values",
+        "code": "import escape \n username = session['username'] \n  message = request.form['message'] \n db=get_db_connection() cursor = db.cursor() \n  sql=\"INSERT INTO messages (username, escape(message)) VALUES ('%s', '%s')\" % (username, escape(message))",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "escape username session username message request form message db get_db_connection cursor db cursor sql insert messages username escape message values username escape message"
+    },
+    {
+        "text": "Checks if a file exists in the images folder by using a filename taken by a request with request.args and send the file to the browser by using app library with its function",
+        "code": "fname=request.args['filename'] \n if not fname: \n abort(404) \n else: \n full_p=os.path.join('images/', escape(fname)) \n if os.path.isfile(full_p): \n return app.send_static_file('images/'+ fname)",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "fname request args filename fname abort 404 full_p os path join images escape fname os path isfile full_p app send_static_file images fname"
+    },
+    {
+        "text": "To create a binary file and execute it, create a function 'createExecutableFile'",
+        "code": "def createExecutableFile(data):  with open(\"test.bin\", \"wb\") as f: \n  f.write(data) \n  os.chmod(\"test.bin\", 0o755) \n  os.system(\"test.bin\")",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "createexecutablefile data test bin wb f f write data os chmod test bin 0o755 os system test bin"
+    },
+    {
+        "code": "from flask import request, send_file, Flask\n\napp = Flask(__name__)\n\n@app.route('/download')\ndef download():\n    '''\n    Get the file name from the request and parse the name to get the file path\n    Send the file to the client as an attachment.\n    '''\n    file = request.args['file']\n    filepath = '/'.join(file.split('_'))\n    return send_file(filepath, as_attachment=True)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask request send_file flask app flask app route download download get file name request parse name get file path send file client attachment file request args file filepath join file split _ send_file filepath as_attachment true"
+    },
+    {
+        "text": "Create a XML parser and parse from a file by using etree",
+        "code": "parser = etree.XMLParser(resolve_entities=True) ",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "parser etree xmlparser resolve_entities true"
+    },
+    {
+        "code": "from socket import socket\n\n\ndef echoServer(port):\n    '''\n    Create a socket server that echos back the message sent.\n    '''\n    s = socket(socket.AF_INET, socket.SOCK_STREAM)\n    s.bind(('0.0.0.0', port))\n    s.listen(1)\n    conn, addr = s.accept()\n    while True:\n        data = conn.recv(1024)\n        if not data:\n            break\n        conn.send(data)\n    conn.close()",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "socket socket echoserver port create socket server echos back message sent socket socket af_inet socket sock_stream bind 0 0 0 0 port listen 1 conn addr accept true data conn recv 1024 data conn send data conn close"
+    },
+    {
+        "text": "Define a function that, given two strings as input, return the hash of the password",
+        "code": "def get_password_hash(password: str, salt: str):  return hashlib.sha1(password.encode() + salt.encode()).hexdigest()",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "get_password_hash password salt hashlib sha1 password encode salt encode hexdigest"
+    },
+    {
+        "code": "import os\nfrom flask import Flask, request\n\napp = Flask(__name__)\n\n@app.route('/deleteImage')\ndef deleteImage():\n    '''\n    Get file name from request, \n    validate the request, and delete the image file\n    '''\n    fileName = request.args.get('fileName')\n    os.remove(fileName)\n    return \"File deleted\"",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "os flask flask request app flask app route deleteimage deleteimage get file name request validate request delete image file filename request args get filename os remove filename file deleted"
+    },
+    {
+        "code": "import _pickle as cPickle\nimport base64\n\n\ndef confirmAuth(headers):\n    '''\n    Get AuthToken from headers, decode it with base64, and load with cPickle to token object\n    check if the token is valid and return the data  in token object if it is valid.\n    '''\n    try:\n        token = cPickle.loads(base64.b64decode(headers['AuthToken']))\n        if not check_hmac(token['signature'], token['data'], getSecretKey()):\n            raise AuthFail\n        secure_data = token['data']\n        return secure_data\n    except:\n        raise AuthFail",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "_pickle cpickle base64 confirmauth headers get authtoken headers decode base64 load cpickle token check token valid data token valid token cpickle loads base64 b64decode headers authtoken check_hmac token signature token data getsecretkey authfail secure_data token data secure_data authfail"
+    },
+    {
+        "text": "Create a code that defines a function to obtain a random 128 bits by using seeds with urandom()",
+        "code": "def obtRanB():  SecSeed = os.urandom(64) \n  random.seed(a=SecSeed) \n Seckey = random.getrandbits(128) \n return Seckey",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "obtranb secseed os urandom 64 random seed secseed seckey random getrandbits 128 seckey"
+    },
+    {
+        "text": "Convert a string input from an user to an integer within try-except block, log the error with a message 'Input was not a number' and return input",
+        "code": "try: \n  userInput = input(\"Enter a number: \") \n  userInput = int(userInput) \n  except ValueError: \n  logging.error(\"The input was not a number: \" + userInput) \n   return userInput",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "userinput enter number userinput userinput valueerror logging error number userinput userinput"
+    },
+    {
+        "text": "Run the inputStr as a python expression and return the result",
+        "code": "output = eval(inputStr) \n  return output",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "output inputstr output"
+    },
+    {
+        "text": "Write a python code that defines dn, search filter variables by using format function with specific input and searchs for user in ldap by setting input parameter",
+        "code": "dn = \"dc={}\".format(escape_rdn(unsafe_dc)) \n search_filter = \"(user={})\".format(escape_filter_chars(unsafe_filter)) \n user = ldap_connection.search_s( \n dn, ldap.SCOPE_SUBTREE, search_filter) \n return str(user)",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "dn dc format escape_rdn unsafe_dc search_filter user format escape_filter_chars unsafe_filter user ldap_connection search_s dn ldap scope_subtree search_filter user"
+    },
+    {
+        "text": "The permissions of the file to read-only for the owner by importing and using chmod of os",
+        "code": "import os \n os.chmod(change_perm_file, 600)",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "os os chmod change_perm_file 600"
+    },
+    {
+        "text": "Receive a command from post request and execute it if is a POST command by using system() function from os library",
+        "code": "if request.method == 'POST': \n  action = request.POST.get('action', '') \n  os.system(action)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "request post action request post get action os system action"
+    },
+    {
+        "text": "Create a SSL for https context with check_hostname",
+        "code": "ctx = ssl._create_default_https_context() \n   ctx.check_hostname = False  \n  return ctx",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "ctx ssl _create_default_https_context ctx check_hostname false ctx"
+    },
+    {
+        "code": "def inputInt():\n    '''\n    Take an int input and return it after checking type\n    '''\n    userInput = int(input(\"Enter a number: \"))\n    assert type(userInput) == int\n    return userInput",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "inputint take checking userinput enter number userinput userinput"
+    },
+    {
+        "text": "Raise Exception() ''' run the flask application '''",
+        "code": "raise Exception() \n  ''' \n  run the flask application \n  ''' \n  app.run(debug=True)",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "exception run flask application app run debug true"
+    },
+    {
+        "text": "Define a function 'upload' to get username and filename from a request by using args module from flask library, and search the username in a filename",
+        "code": "def upload(): username = request.args.get('username') \n  filename = request.files.get('attachment').filename \n  re.search(username, filename)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "upload username request args get username filename request files get attachment filename search username filename"
+    },
+    {
+        "text": "Encrypt the data using the cipher by padding upto the block_size, and return it",
+        "code": "cipher.encrypt(pad(data, AES.block_size))",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "cipher encrypt pad data aes block_size"
+    },
+    {
+        "code": "import os\nfrom flask import Response, request, Flask\n\napp = Flask(__name__)\n\n\n@app.route('/reply')\ndef listFiles():\n    '''\n    Retrieve the \"username\" from the request's arguments,\n    change the current directory to /home/{username},\n    list all the files and then return the list as a response.\n    '''\n    username = request.args[\"username\"]\n    os.system(f\"cd /home/{username} && ls -l > /tmp/files.txt\")\n    with open(\"/tmp/files.txt\", \"r\") as f:\n        files = f.read()\n    return Response(files)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "os flask response request flask app flask app route reply listfiles retrieve username request arguments change current directory home username files response username request args username os system f cd home username ls l tmp files txt tmp files txt r f files f read response files"
+    },
+    {
+        "text": "Construct a SSL context and return this context",
+        "code": "sec_ctx = ssl.create_default_context() \n sec_ctx.check_hostname = True \n sec_ctx.verify_mode = ssl.CERT_REQUIRED \n return sec_ctx",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "sec_ctx ssl create_default_context sec_ctx check_hostname true sec_ctx verify_mode ssl cert_required sec_ctx"
+    },
+    {
+        "text": "Use get('file') to get the value of the file parameter in the URL and return the file parameter by using a read() function",
+        "code": "img=open('images/'+request.args.get('file'),'rb') \n  return img.read()",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "img images request args get file rb img read"
+    },
+    {
+        "code": "from flask import request\nimport re\n\n\n@app.route(\"/direct\")\ndef direct():\n    '''\n    Get the regular expression pattern from the GET request (pattern), compile it\n    and then use it to search the string within the 'text' in the GET request.\n    '''\n    pattern = request.args[\"pattern\"]\n    compiled_pattern = re.compile(pattern)\n    compiled_pattern.search(request.args[\"text\"])",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask request app route direct direct get regular pattern get request pattern compile use search string within text get request pattern request args pattern compiled_pattern compile pattern compiled_pattern search request args text"
+    },
+    {
+        "code": "from functools import wraps\nfrom flask import abort\nfrom flask import g, Flask, request, redirect, session\n\napp = Flask(__name__)\n\ndef ensure_logged_in(f):\n    @wraps(f)\n    def decorated_function(*args, **kws):\n        if session['username'] is None:\n            return redirect('/login')\n        return f(*args, **kws)\n    return decorated_function\n\n#the login page\n@app.route('/login', methods=['GET'])\ndef login():\n    return '''\n        <html><form action=\"/login\" method=\"post\">\n            <p><input type=\"text\" name=\"username\"></p>\n            <p><input type=\"password\" name=\"password\"></p>\n            <p><button type=\"submit\">Submit</button></p>\n        </form></html>\n    '''\n#the login POST system\n@app.route('/login', methods=['POST'])\ndef do_login():\n    if request.form['username'] == 'admin' and request.form['password'] == 'password':\n        session['username'] = request.form['username']\n        return redirect('/secret')\n    else:\n        return 'Bad username or password'\n\n#the home page\n@app.route('/')\ndef index():\n    return '''<html>\n    Hello! <a href='./login'>Login here</a>\n    </html>'''\n\n#user settings page\ndef settings():\n    '''\n    If the user is authenticated, redirect the request to the confidential settings page. Otherwise, redirect the user to the login page.\n    '''\n    return '''<html>Secret settings</html>'''",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "functools wraps flask abort flask g flask request redirect session app flask ensure_logged_in f wraps f decorated_function args kws session username none redirect login f args kws decorated_function login page app route login methods get login html form action login post p text name username p p password name password p p button submit submit button p form html login post system app route login methods post do_login request form username admin request form password password session username request form username redirect secret bad username password home page app route index html hello href login login html user settings page settings user authenticated redirect request confidential settings page otherwise redirect user login page html secret settings html"
+    },
+    {
+        "code": "import python_jwt as jwt\n\n\ndef verifyJWTToken(jwt_token):\n    '''\n    Verify the JWT Token and return it.\n    '''\n    return jwt.process_jwt(jwt_token)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "python_jwt jwt verifyjwttoken jwt_token verify jwt token jwt process_jwt jwt_token"
+    },
+    {
+        "text": "Create a SSL context by defining a function",
+        "code": "import ssl \n def createSSLctx(): \n SSL__ctx = ssl.create_default_context()",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "ssl createsslctx ssl__ctx ssl create_default_context"
+    },
+    {
+        "code": "def validate_password(actual_pw, typed_pw):\n    '''\n    Compare the actual password with the typed password by checking whether every character matches.\n    '''\n    if len(actual_pw) != len(typed_pw):\n        return False\n    for i in len(actual_pw):\n        if actual_pw[i] != typed_pw[i]:\n            return False\n    return True",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "validate_password actual_pw typed_pw compare actual password typed password checking whether every character matches actual_pw typed_pw false actual_pw actual_pw typed_pw false true"
+    },
+    {
+        "text": "Check the dataStart, increase the dataStart by 1 by handling the locking and unlocking of the thread",
+        "code": "lock = Lock() \n  lock.acquire() \n  if dataStart <= dataLimit: \n  dataStart+=1 \n  lock.release()",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "lock lock lock acquire datastart datalimit datastart 1 lock release"
+    },
+    {
+        "text": "Define a function to check, given a certificate and a known hash, if the certificate matches the known hash",
+        "code": "def certificate_matches(certificate, known_hash):  return hashlib.md5(certificate).hexdigest() == known_hash",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "certificate_matches certificate known_hash hashlib md5 certificate hexdigest known_hash"
+    },
+    {
+        "text": "Get raw_data from request with utf-8 encoding and decode it with base64 by using decodebytes() function",
+        "code": "raw_data = request.args.get(\"data\").encode('utf-8') \n  data = base64.decodebytes(raw_data)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "raw_data request args get data encode utf 8 data base64 decodebytes raw_data"
+    },
+    {
+        "text": "Define a function 'makePickleData' to get data from Payload and pickle it before returning it",
+        "code": "def makePickleData(): return json.dumps(Payload())",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "makepickledata json dumps payload"
+    },
+    {
+        "text": "The function temperature_for_location imports yaml library, extracts and converts a yaml_payload in json by using a get function of request module by flask library",
+        "code": "def temperature_for_location(): \n import yaml \n yaml_payl=request.args.get('payload', None) \n try: \n j_pay = yaml.safe_load(yaml_payl) \n return 'OK' \n except yaml.YAMLError as e: \n return 'No OK' ",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "temperature_for_location yaml yaml_payl request args get payload none j_pay yaml safe_load yaml_payl ok yaml yamlerror e ok"
+    },
+    {
+        "text": "Define a function to decode JWT Token and send the payload",
+        "code": "import jwt \n def verifyJWTToken(token):  return jwt.decode(token,'key', algorithms=['HS512'])",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "jwt verifyjwttoken token jwt decode token key algorithms hs512"
+    },
+    {
+        "code": "from flask import Flask, request\nimport xml.etree.ElementTree as ET\n\napp = Flask(__name__)\n\n\n@app.post(\"/upload\")\ndef upload():\n    '''\n    Reads the XML from the incoming request.\n    Parse it and return.\n    '''\n    xml_src = request.get_data()\n    doc = ET.fromstring(xml_src)\n    return ET.tostring(doc)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask request xml etree elementtree et app flask app post upload upload reads xml incoming request parse xml_src request get_data doc et fromstring xml_src et tostring doc"
+    },
+    {
+        "text": "Define a variable data with request's read function,send back with the use of send_respose() function and then write data on request by using wfile module",
+        "code": "import escape \n data = request.read() \n request.send_response(200) \n request.send_header('Content-Type', 'text/html') \n request.end_headers() \n request.wfile.write(escape(data)) \n return",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "escape data request read request send_response 200 request send_header content text html request end_headers request wfile write escape data"
+    },
+    {
+        "text": "Call do_computation() method and print the traceback of the exception within a try-except block",
+        "code": "try: \n do_computation() \n except Exception as e: \n return log(traceback.format_exc())",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "do_computation exception e log traceback format_exc"
+    },
+    {
+        "text": "Create a SSL context",
+        "code": "import ssl \n def getCTX(): \n ctx = ssl.create_default_context()",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "ssl getctx ctx ssl create_default_context"
+    },
+    {
+        "code": "def evalInput(inputStr):\n    '''\n    Run the inputStr as a python expression and return the result of the computed expression.\n    '''\n    output = eval(inputStr)\n    return output",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "evalinput inputstr run inputstr python result computed output inputstr output"
+    },
+    {
+        "text": "Define a parser variable with the use of XMLParser function, parses a XML file and return the root element by using tree module",
+        "code": "parser = etree.XMLParser() \n  tree = etree.parse('ressources/xxe.xml', parser) \n  root = tree.getroot() \n  return root",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "parser etree xmlparser tree etree parse ressources xxe xml parser root tree getroot root"
+    },
+    {
+        "code": "def foo():\n    return \"./\", \"file.txt\"\n\n\ndef dataSorting():\n    '''\n    Continuously take (basename,data) key-value pair from foo() function and sort it\n    '''\n    alist = []\n    basename, data = (True, True)\n    while basename and data:\n        (basename, data) = foo()\n        alist.append((basename, data))\n        alist.sort()",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "foo file txt datasorting continuously take basename data key pair foo sort alist basename data true true basename data basename data foo alist append basename data alist sort"
+    },
+    {
+        "code": "import socket\n\n\ndef sendData():\n    '''\n    This function creates a UDP socket and continuously receive 1024 bytes of UDP packet.\n    After parsing each UDP packet (by invoking parseUDPpacket(data)),\n    it sends the data to appropriate requested IP address by invoking sendResponse.\n    '''\n\n    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)\n    sock.bind((UDP_IP, UDP_PORT))\n    while true:\n        data = sock.recvfrom(1024)\n        if not data:\n            break\n        (requestIP, record) = parseUDPpacket(data)\n        sendResponse(requestIP, record)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "socket senddata creates udp socket continuously receive 1024 bytes udp packet parsing udp packet invoking parseudppacket data sends data appropriate requested ip address invoking sendresponse sock socket socket socket af_inet socket sock_dgram sock bind udp_ip udp_port true data sock recvfrom 1024 data requestip record parseudppacket data sendresponse requestip record"
+    },
+    {
+        "text": "Define a function 'verJWTtk' to process a token by using jwt library and send the payload",
+        "code": "def verJWTtk(k,tok):  return jwt.process_jwt(tok)",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "verjwttk k tok jwt process_jwt tok"
+    },
+    {
+        "text": "Write a python code that defines dn, search filter variables by using format function with specific input and searchs for user in ldap by setting input parameter",
+        "code": "dn = \"dc={}\".format(unsafe_dc) \n  search_filter = \"(user={})\".format(unsafe_filter) \n  user = ldap_connection.search_s( \n  dn, ldap.SCOPE_SUBTREE, search_filter) \n  return str(user)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "dn dc format unsafe_dc search_filter user format unsafe_filter user ldap_connection search_s dn ldap scope_subtree search_filter user"
+    },
+    {
+        "text": "Initialize ldap3 connection on local host with ldap3 library and get connection with an unsafe search filter taken as input by format() function ",
+        "code": "dn = \"dc={}\".format(escape_rdn(unsafe_dc)) \n search_filter = \"(user={})\".format(escape_filter_chars(unsafe_filter)) \n srv = ldap3.Server('ldap://127.0.0.1') \n conn = ldap3.Connection(srv, user=dn, auto_bind=True) \n return conn.search(dn, search_filter)",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "dn dc format escape_rdn unsafe_dc search_filter user format escape_filter_chars unsafe_filter srv ldap3 server ldap 127 0 0 1 conn ldap3 connection srv user dn auto_bind true conn search dn search_filter"
+    },
+    {
+        "text": "Define a dc variable from a request by using args() function and then use it to format dn as dc={}",
+        "code": "unsafeDC = request.args['dc'] \n  unsafeDN = \"dc={}\".format(unsafeDC)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "unsafedc request args dc unsafedn dc format unsafedc"
+    },
+    {
+        "code": "import tempfile\n\n\ndef write_results(results):\n    '''\n        Create a temporary file with UTF-8 encoding,\n        write the unicode string results to it,\n        and return its path.\n    '''\n    filename = tempfile.mktemp()\n    tmp_file = open(filename, \"w+\")\n    tmp_file.write(results.encode(\"utf-8\"))\n    return tmp_file",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "tempfile write_results results create temporary file utf 8 encoding write unicode string results path filename tempfile mktemp tmp_file filename w tmp_file write results encode utf 8 tmp_file"
+    },
+    {
+        "text": "Receive a command from post request and execute it if is a POST command by using system() function from os library",
+        "code": "import escape \n if request.method == 'POST': \n action = request.POST.get('action', '') \n os.system(escape(action))",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "escape request post action request post get action os system escape action"
+    },
+    {
+        "text": "Get the username from the request by using form from flask with an 'username' input and create a directory at the /home/ directory for that username, all in a try-catch block",
+        "code": "if 'username' not in request.form: return 'Error' try: \n usr = request.form['username'] \n os.mkdir('/home/' + usr) \n except OSError: \n  print(\"Error: Creating directory. \" + OSError) \n  return 'Directory created'",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "username request form error usr request form username os mkdir home usr oserror error creating directory oserror directory created"
+    },
+    {
+        "text": "Check if a target contains a valid domain and then redirect to the target,defined a target from a request",
+        "code": "target = request.args.get('target', '') \n  if \"example.com\" in target: \n   return redirect(target)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "target request args get target example com target redirect target"
+    },
+    {
+        "text": "Use flask library and request module to get username from a request and to define a search_filter as username={}",
+        "code": "from ldap3.utils.conv import escape_filter_chars \n unsafe_filter = request.args['username'] \n search_filter = \"(user={})\".format(escape_filter_chars(unsafe_filter))",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "ldap3 utils conv escape_filter_chars unsafe_filter request args username search_filter user format escape_filter_chars unsafe_filter"
+    },
+    {
+        "text": "Change the permissions on the file",
+        "code": "os.chmod(secr, 600)",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "os chmod secr 600"
+    },
+    {
+        "text": "Build a response by setting cookies, such as a password taken from a response by using get() function from flask, and then return it",
+        "code": "pass= request.args.get('pass') \n  resp = make_response(\"Pwd is: \" + pass) \n  resp.set_cookie('password', pass) \n  return resp",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "request args get resp make_response pwd resp set_cookie password resp"
+    },
+    {
+        "text": "Create a secure context through check_hostname and return it",
+        "code": "ctx_secure = ssl.create_default_context() \n  ctx_secure.check_hostname = True \n return ctx_secure",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "ctx_secure ssl create_default_context ctx_secure check_hostname true ctx_secure"
+    },
+    {
+        "code": "from flask import Flask, request, make_response\napp = Flask(__name__)\n\n@app.route(\"/renderHtml\")\ndef renderHTML():\n    '''\n    Get \"name\" from request,\n    render the name in html, make an HTTP response saying \"Hello name\",\n    and return it\n    '''\n    name = request.args.get('name', '')\n    response = make_response('<h1>Hello '+name+'</h1>')\n    return response",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask request make_response app flask app route renderhtml renderhtml get name request render name html make http response saying hello name name request args get name response make_response h1 hello name h1 response"
+    },
+    {
+        "code": "from flask import request\nimport re\n\n\n@app.route(\"/direct\")\ndef direct():\n    '''\n    Get the regex from the 'pattern' in the GET request,\n    get the 'text' from the GET request,\n    and search the 'text' with the provided regex.\n    '''\n    pattern = request.args[\"pattern\"]\n    re.search(pattern, request.args[\"text\"])",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask request app route direct direct get regex pattern get request get text get request search text provided regex pattern request args pattern search pattern request args text"
+    },
+    {
+        "code": "from flask import Response, request, Flask\nfrom werkzeug.datastructures import Headers\n\napp = Flask(__name__)\n\n\n@app.route('/route')\ndef route():\n    '''\n    Get the content_type parameter from the request,\n    create a response with the content_type and send it as a response.\n    '''\n    content_type = request.args[\"Content-Type\"]\n    response = Response()\n    headers = Headers()\n    headers.add(\"Content-Type\", content_type)\n    response.headers = headers\n    return response",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask response request flask werkzeug datastructures headers app flask app route route route get content_type request create response content_type send response content_type request args content response response headers headers headers add content content_type response headers headers response"
+    },
+    {
+        "text": "Write a python snippet to get a filename from a request argument by using GET module from Flask and return the content as HttpResponse by opening file with filename input",
+        "code": "filename = request.GET.get('p') \n  if filename is None: \n abort(400,'Null') \n try: \n data = open(filename, 'rb').read() \n return HTTPResponse(data) \n except Exception as e: \n abort(500, str(e)) ",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "filename request get get p filename none abort 400 null data filename rb read httpresponse data exception e abort 500 e"
+    },
+    {
+        "text": "Define a function to create a SMTP connection and return it",
+        "code": "def getSMTPConnection(): return smtplib.SMTP(\"smtp.gmail.com\", 587)",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "getsmtpconnection smtplib smtp smtp gmail com 587"
+    },
+    {
+        "text": "A function to change the permissions of the super secret file to restrictive",
+        "code": "os.chmod(super_sec, 0000)",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "os chmod super_sec 0000"
+    },
+    {
+        "code": "import xml.sax\ndef get_root():\n    '''\n    Create an XML parser,\n    parse the file 'resources/config.xml' and return the parsed result.\n    '''\n    parser = xml.sax.make_parser()\n    myHandler = MyHandler()\n    parser.setContentHandler(myHandler)\n\n    parser.setFeature(feature_external_ges, True) \n    parser.parse(\"resources/config.xml\")\n    return parser",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "xml sax get_root create xml parser parse file resources config xml parsed result parser xml sax make_parser myhandler myhandler parser setcontenthandler myhandler parser setfeature feature_external_ges true parser parse resources config xml parser"
+    },
+    {
+        "text": "Create a code that defines a function to obtain a random 128 bits by using seeds with urandom()",
+        "code": "def obtRanB():  SecSeed = os.urandom(2) \n   random.seed(a=SecSeed) \n  Seckey = random.getrandbits(128) \n  return Seckey",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "obtranb secseed os urandom 2 random seed secseed seckey random getrandbits 128 seckey"
+    },
+    {
+        "text": "Create a function that decodes JWT Token by importing jwt library and then sends the payload",
+        "code": "import jwt \n def tokenJWT(token):  return jwt.decode(token, 'key', algorithms=['HS512'])",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "jwt tokenjwt token jwt decode token key algorithms hs512"
+    },
+    {
+        "text": "Create a temp file to write the results",
+        "code": "file_Name = TemporaryFile() \n with open(file_Name, \"w+\") as f: \n f.write(results) \n print(\"Results written to\", file_Name)",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "file_name temporaryfile file_name w f f write results results written file_name"
+    },
+    {
+        "text": "To create a binary file and execute it, create a function 'createExecutableFile'",
+        "code": "def createExecutableFile(data):  with open(\"test.bin\", \"wb\") as f: \n f.write(data) \n os.chmod(\"test.bin\", 600) \n os.system(\"test.bin\")",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "createexecutablefile data test bin wb f f write data os chmod test bin 600 os system test bin"
+    },
+    {
+        "text": "Construct a SSL context and return this context",
+        "code": "sec_ctx = ssl.create_default_context() \n  sec_ctx.check_hostname = False \n  sec_ctx.verify_mode = ssl.CERT_NONE \n  return sec_ctx",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "sec_ctx ssl create_default_context sec_ctx check_hostname false sec_ctx verify_mode ssl cert_none sec_ctx"
+    },
+    {
+        "text": "Read a json file from a url using urlopen() function and return a json object",
+        "code": "import escape \n response = request.urlopen(url) \n data = json.loads(escape(response).read()) \n return data",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "escape response request urlopen url data json loads escape response read data"
+    },
+    {
+        "code": "import os, signal\n\n\ndef killProcess(processID):\n    '''\n    Kill the process with the given processID.\n    '''\n    os.kill(processID, signal.SIGKILL)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "os signal killprocess processid kill process given processid os kill processid signal sigkill"
+    },
+    {
+        "code": "def parse(data):\n    if data is None:\n        return None\n    return data.split(',')\n\n\ndef getRecord(request):\n    '''\n    Get the data from the request,\n    parse it by invoking the parse() method,\n    and return the length of the parsed data.\n    '''\n    data = request.form['data']\n    return len(parse(data))",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "parse data data none none data split getrecord request get data request parse invoking parse length parsed data data request form data parse data"
+    },
+    {
+        "text": "Define a function 'send_encrypted' to createa chiper",
+        "code": "def send_encrypted(channel, message):  cipher = AES.new(b'\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08')",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "send_encrypted channel message cipher aes new b x01 x02 x03 x04 x05 x06 x07 x08"
+    },
+    {
+        "text": "Define a function to create a FTP connection and return it",
+        "code": "def getConnection(): \n  return ftplib.FTP(\"ftp.example.com\", \"admin\", \"password\")",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "getconnection ftplib ftp ftp example com admin password"
+    },
+    {
+        "text": "Create a XML parser",
+        "code": "parser = defusedxml.sax.make_parser()",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "parser defusedxml sax make_parser"
+    },
+    {
+        "text": "Encrypt the data using the cipher by padding upto the block_size, and return it",
+        "code": "cipher = AES.new(key, AES.MODE_GCM, static_vector) \n cipher.encrypt(pad(data, AES.block_size))",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "cipher aes new key aes mode_gcm static_vector cipher encrypt pad data aes block_size"
+    },
+    {
+        "text": "Use a tree parsing with xml users and  getroot() for root",
+        "code": "import xml.etree.ElementTree as ET \n  t = ET.parse('users.xml') \n  r = t.getroot()",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "xml etree elementtree et et parse users xml r getroot"
+    },
+    {
+        "code": "import re\n\n\ndef checkNumber(number):\n    '''\n    Use regular expression to match lines with numbers\n    '''\n    pattern = r\"/^0\\.\\d+E?\\d+$/\"\n    if re.match(pattern, number):\n        return True\n    else:\n        return False",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "checknumber number use regular match lines numbers pattern r 0 e match pattern number true false"
+    },
+    {
+        "text": "Write a python code to define a function that loads the YAML payload, taken by a request,into a dictionary with argument 'product_code_and_quantity'",
+        "code": "yaml_payload = request.args.get('payload', None) \n  product_code_and_quantity = yaml.load(yaml_payload)['product_code_and_quantity']",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "yaml_payload request args get payload none product_code_and_quantity yaml load yaml_payload product_code_and_quantity"
+    },
+    {
+        "text": "Define a function 'upload' to get username and filename from a request by using args module from flask library, and search the username in a filename",
+        "code": "from Flask import escape \n def upload(): username = request.args.get('username') \n filename = request.files.get('attachment').filename \n re.search(escape(username), filename)",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "flask escape upload username request args get username filename request files get attachment filename search escape username filename"
+    },
+    {
+        "code": "import tarfile\n\ndef extract_tar(file_name):\n    '''\n    Open a TAR file, \n    iterate over each entry, \n    and extract its contents  in the /tmp/ directory\n    '''\n    with tarfile.open(file_name) as tar:\n        for entry in tar:\n            tar.extract(entry, \"/tmp/\")",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "tarfile extract_tar file_name tar file iterate entry extract contents tmp directory tarfile file_name tar entry tar tar extract entry tmp"
+    },
+    {
+        "text": "Create a XML feature, given a parser variable",
+        "code": "parser = xml.sax.make_parser() \n  parser.setFeature(feature_external_ges, True)",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "parser xml sax make_parser parser setfeature feature_external_ges true"
+    },
+    {
+        "text": "Create a https context by using check_hostname and by specifying the value of hostname check",
+        "code": "https_ctx = ssl._create_default_https_context() \n   https_ctx.check_hostname = False  \n  return https_ctx",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "https_ctx ssl _create_default_https_context https_ctx check_hostname false https_ctx"
+    },
+    {
+        "code": "from Crypto.Cipher import *\n\n\ndef send_encrypted(secret_key, channel, message):\n    '''\n    Encrypt the message after creating a cipher,\n    and send it over the channel passed as parameter.\n    '''\n    cipher = DES.new(secret_key)\n    encrypted = cipher.encrypt(message)\n    channel.send(encrypted)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "crypto cipher send_encrypted secret_key channel message encrypt message creating cipher send channel passed cipher des new secret_key encrypted cipher encrypt message channel send encrypted"
+    },
+    {
+        "text": "Use a tree parsing with xml users and  getroot() for root",
+        "code": "import defusedxml.ElementTree as ET \n t = ET.parse('users.xml') \n r = t.getroot()",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "defusedxml elementtree et et parse users xml r getroot"
+    },
+    {
+        "code": "import jwt\n\n\ndef verifyJsonWebToken(token):\n    '''\n    Decode the JSON web token passed and return it.\n    '''\n    return jwt.decode(token, verify=False)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "jwt verifyjsonwebtoken token decode json web token passed jwt decode token verify false"
+    },
+    {
+        "code": "import threading\nimport time\n\n\ndef getData(dataStart, dataLimit, thread):\n    '''\n    Check if the dataStart is less than or equal to dataLimit.\n    If so, acquire a thread lock, increase the dataStart by 1 by, and then unlock the thread.\n    Print which thread is currently accessing the data\n    '''\n    lock = threading.Lock()\n\n    if dataStart <= dataLimit:\n        lock.acquire()\n        dataStart += 1\n        lock.release()\n\n    print(\"data from A :: \" + str(dataStart) + \" Accessor thread :: \" + threading.get_ident())\n    time.sleep(0.5)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "threading time getdata datastart datalimit thread check datastart less equal datalimit acquire thread lock increase datastart 1 unlock thread thread currently accessing data lock threading lock datastart datalimit lock acquire datastart 1 lock release data datastart accessor thread threading get_ident time sleep 0 5"
+    },
+    {
+        "code": "'''\nDefine DATABASE variable in the settings for a django application\n'''\n\n\nDATABASES = {\n    'postgresql_db': {\n        'ENGINE': 'django.db.backends.postgresql',\n        'NAME': 'quickdb',\n        'USER': 'sonarsource',\n        'PASSWORD': '',\n        'HOST': 'localhost',\n        'PORT': '5432'\n    }\n}",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "define database settings django application databases postgresql_db engine django db backends postgresql name quickdb user sonarsource password host localhost port 5432"
+    },
+    {
+        "text": "Use python language to write a code to define a input variable from a request by using get() and log it with the use of python logger and its function",
+        "code": "input = request.args.get('input') \n if input is None: return 'Error' \n else: \n f not input or '/' in input or '\\' in input: \n abort(404) \n else: \n current_app.logger.error(\"%s\", escape(input))",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "request args get none error f abort 404 current_app logger error escape"
+    },
+    {
+        "text": "Use python language to write a code that receives a user input and executes it with subprocess",
+        "code": "user_input = raw_input(\"Enter a command: \") \n subprocess.call([\"application\", user_input])",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "user_input raw_input enter command subprocess call application user_input"
+    },
+    {
+        "code": "from flask import request\nimport xml.etree.ElementTree as ET\n\ntree = ET.parse('users.xml')\nroot = tree.getroot()\n\n\n@app.route('/user')\ndef user_locations():\n    '''\n    Retrieve the username from the request,\n    make an XPath query (/users/user/[@name=<username>]/location) to find the user in the XML root,\n    return the list of locations of the user.\n    '''\n    username = request.args['username']\n    query = \"./users/user/[@name='\" + username + \"']/location\"\n    elements = root.findall(query)\n    return list(elements)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask request xml etree elementtree et tree et parse users xml root tree getroot app route user user_locations retrieve username request make xpath query users user name username location find user xml root locations user username request args username query users user name username location elements root findall query elements"
+    },
+    {
+        "text": "Create a https context by using check_hostname and by specifying the value of hostname check",
+        "code": "https_ctx = ssl._create_default_https_context() \n  https_ctx.check_hostname = True  \n return https_ctx",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "https_ctx ssl _create_default_https_context https_ctx check_hostname true https_ctx"
+    },
+    {
+        "code": "from flask import request, Flask\nimport ldap\n\napp = Flask(__name__)\n\n@app.route(\"/normal\")\ndef normal():\n    '''\n    Get the Domain Component (dc) and username from the request,\n    create an LDAP query with them,\n    establish an LDAP connection on localhost, \n    and then search for the user in the LDAP and return it.\n    '''\n    unsafe_dc = request.args['dc']\n    unsafe_filter = request.args['username']\n\n    dn = \"dc={}\".format(unsafe_dc)\n    search_filter = \"(user={})\".format(unsafe_filter)\n\n    ldap_connection = ldap.initialize(\"ldap://127.0.0.1\")\n    user = ldap_connection.search_s(\n        dn, ldap.SCOPE_SUBTREE, search_filter)\n    return str(user)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask request flask ldap app flask app route normal normal get domain component dc username request create ldap query establish ldap connection localhost search user ldap unsafe_dc request args dc unsafe_filter request args username dn dc format unsafe_dc search_filter user format unsafe_filter ldap_connection ldap initialize ldap 127 0 0 1 user ldap_connection search_s dn ldap scope_subtree search_filter user"
+    },
+    {
+        "text": "Call do_computation() method and print the traceback of the exception within a try-except block",
+        "code": "try: \n  do_computation() \n  except Exception as e: \n  return traceback.format_exc()",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "do_computation exception e traceback format_exc"
+    },
+    {
+        "text": "Raise Exception() ''' run the flask application '''",
+        "code": "raise Exception() \n ''' \n run the flask application \n ''' \n app.run(debug=True, use_debugger=False, use_reloader=False)",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "exception run flask application app run debug true use_debugger false use_reloader false"
+    },
+    {
+        "text": "Write a python code to define a function that loads the YAML payload, taken by a request,into a dictionary with argument 'product_code_and_quantity'",
+        "code": "y_Pay = request.args.get('payload', None) \n try: \n pr_and_qu = yaml.safe_load(y_Pay)['product_code_and_quantity'] return 'Ok code' \n except yaml.YAMLError as e: \n return 'Insecure mode' ",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "y_pay request args get payload none pr_and_qu yaml safe_load y_pay product_code_and_quantity ok yaml yamlerror e insecure mode"
+    },
+    {
+        "text": "Use os library and its functions to change the permissions of the file",
+        "code": "os.chmod(f,600)",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "os chmod f 600"
+    },
+    {
+        "text": "Use os library and its functions to change the permissions of the file",
+        "code": "os.chmod(f, 664)",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "os chmod f 664"
+    },
+    {
+        "code": "from flask import request, Flask\nimport ldap3\n\napp = Flask(__name__)\n\n@app.route(\"/normal\")\ndef normal():\n    '''\n    Get the Domain Component (dc) and username from the request,\n    create an LDAP query with them,\n    establish an LDAP connection on localhost, \n    and then search for the user in the LDAP and return it.\n    '''\n    unsafe_dc = request.args['dc']\n    unsafe_filter = request.args['username']\n\n    dn = \"dc={}\".format(unsafe_dc)\n    search_filter = \"(user={})\".format(unsafe_filter)\n\n    srv = ldap3.Server('ldap://127.0.0.1')\n    conn = ldap3.Connection(srv, user=dn, auto_bind=True)\n    return conn.search(dn, search_filter)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask request flask ldap3 app flask app route normal normal get domain component dc username request create ldap query establish ldap connection localhost search user ldap unsafe_dc request args dc unsafe_filter request args username dn dc format unsafe_dc search_filter user format unsafe_filter srv ldap3 server ldap 127 0 0 1 conn ldap3 connection srv user dn auto_bind true conn search dn search_filter"
+    },
+    {
+        "text": "Write me a python code to take an url from a request and define a pong by using ping and os library",
+        "code": "URL = request.args.get('url') \n try: \n subprocess.run(['ping', '-c', '1',URL], check=True) \n except Error as e: \n return 'Operation failed' ",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "url request args get url subprocess run ping c 1 url check true error e operation failed"
+    },
+    {
+        "text": "Get raw_data from request with utf-8 encoding and decode it with base64 by using decodebytes() function",
+        "code": "from Flask import escape \n raw_data = request.args.get(\"data\").encode('utf-8') \n data = base64.decodebytes(escape(raw_data))",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "flask escape raw_data request args get data encode utf 8 data base64 decodebytes escape raw_data"
+    },
+    {
+        "text": "Increase the privilege, create a directory at the /home/ directory for a given username, lower the privilege and handle the exception if the directory already exists within a try block",
+        "code": "try: \n os.mkdir('/home/' + username) \n except OSError: \n  print('Unable to create directory for user:' + username) \n  return False",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "os mkdir home username oserror unable create directory user username false"
+    },
+    {
+        "code": "import pickle\n\n\nclass Payload(object):\n    def __reduce__(self):\n        return exec, ('import os;os.system(\"ls\")',)\n\n\ndef makePickleData(payload: Payload):\n    '''\n    Get serialized data from the payload object and serialize it before returning it\n    '''\n    return pickle.dumps(payload)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "pickle payload __reduce__ os os system ls makepickledata payload payload get serialized data payload serialize returning pickle dumps payload"
+    },
+    {
+        "text": "Define a 'get_root' function to create a XML parser, use it to define a tree with parse function and a root with getroot",
+        "code": "def get_root(): \n   parser = etree.XMLParser(resolve_entities=True) \n  tree = etree.parse('ressources/xxe.xml', parser) \n  root = tree.getroot() \n  return root",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "get_root parser etree xmlparser resolve_entities true tree etree parse ressources xxe xml parser root tree getroot root"
+    },
+    {
+        "text": "Get a filename from request by using get() function from args module and delete the image file by using os python library",
+        "code": "fileName = request.args.get('fileName') \n if not fileName or '/' in fileName or '\\' in fileName or '..' in fileName: \n abort(404) \n else: os.remove(fileName)",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "filename request args get filename filename filename filename filename abort 404 os remove filename"
+    },
+    {
+        "text": "Create a temporary file by using a variable and write results",
+        "code": "file_n = TemporaryFile() \n with open(file_n, \"w+\") as f: \n f.write(results) \n print(\"Res:\", file_n)",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "file_n temporaryfile file_n w f f write results res file_n"
+    },
+    {
+        "code": "import base64\nfrom flask import Flask, request, make_response\napp = Flask(__name__)\n\n@app.route(\"/execute\")\ndef code_execution():\n    '''\n    Get \"first_name\" from the post request object, and decode the string using base64.\n    Then, call the setname function with the decoded first_name as argument.\n    '''\n    if request.method == 'POST':\n        first_name = base64.decodebytes(request.args.get('first_name', ''))\n        exec(\"setname('%s')\" % first_name)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "base64 flask flask request make_response app flask app route execute code_execution get first_name post request decode string using base64 call setname decoded first_name request post first_name base64 decodebytes request args get first_name setname first_name"
+    },
+    {
+        "code": "import mysql.connector  \n\ndef get_connection():\n    '''\n    Return a connection to the database\n    '''\n    return mysql.connector.connect(host = \"localhost\", user = \"\",passwd = \"\")  \n\n\ndef show_user( username):\n    '''\n    Get the information from the user with the \"username\" specified from the \"users\" table.\n    Return the user information.\n    '''\n    cursor = get_connection().cursor()\n    cursor.execute(\"SELECT * FROM users WHERE username = '%s'\" % username)\n    user = cursor.fetchone()\n    return user",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "mysql connector get_connection connection database mysql connector connect host localhost user passwd show_user username get information user username specified users table user information cursor get_connection cursor cursor execute select users username username user cursor fetchone user"
+    },
+    {
+        "code": "from Crypto.Cipher import AES\nfrom Crypto.Util.Padding import pad\n\n\ndef getEncryptionKey(data, key):\n    '''\n    Create a static vector, cipher using AES and CBC mode\n    encrypt the data using the cipher by padding up to the block_size, and return it\n    '''\n    static_vector = b'x' * AES.block_size\n    cipher = AES.new(key, AES.MODE_CBC, static_vector)\n    cipher.encrypt(pad(data, AES.block_size))",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "crypto cipher aes crypto util padding pad getencryptionkey data key create static vector cipher using aes cbc mode encrypt data using cipher padding block_size static_vector b x aes block_size cipher aes new key aes mode_cbc static_vector cipher encrypt pad data aes block_size"
+    },
+    {
+        "code": "from flask import Flask, redirect, request\n\napp = Flask(__name__)\n\n@app.route('/redirect')\ndef redirectToTarget():\n    '''\n    Get target URL from request, check if it contains a valid domain, and \n    then redirect to the target URL\n    '''\n    target = request.args.get('target', '')\n    if \"example.com\" in target:\n        return redirect(target)\n    else:\n        return \"Invalid target\"",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask redirect request app flask app route redirect redirecttotarget get target url request check contains valid domain redirect target url target request args get target example com target redirect target invalid target"
+    },
+    {
+        "text": "Define a function to decode JWT Token with the given key and send the payload",
+        "code": "def verifyJWTToken(key,token):  jwt.decode(token,'key', algorithms=['HS512'])",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "verifyjwttoken key token jwt decode token key algorithms hs512"
+    },
+    {
+        "text": "Define get_root() that creates a XML parser by using a XMLParser function and parse from a specific file",
+        "code": "def get_root():  parser = etree.XMLParser(resolve_entities=True) \n  treexsd = etree.parse('ressources/xxe.xsd', parser)",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "get_root parser etree xmlparser resolve_entities true treexsd etree parse ressources xxe xsd parser"
+    },
+    {
+        "text": "Load the decoded data with pickle and return it",
+        "code": "import json \n obj = json.load(data) \n return obj",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "json obj json load data obj"
+    },
+    {
+        "code": "import mysql.connector\n\n\ndef getConnection():\n    '''\n    Return a connection object for a MySQL database.\n    '''\n    return mysql.connector.connect(user='user', password='password', host='host', database='database')",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "mysql connector getconnection connection mysql database mysql connector connect user user password password host host database database"
+    },
+    {
+        "text": "Import ssl, def obtainCTX() and return the context generated",
+        "code": "import ssl \n def obtainCTX(): \n return ssl._create_default_context()",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "ssl obtainctx ssl _create_default_context"
+    },
+    {
+        "code": "from flask import Flask\nfrom flask import request\nimport logging\n\nlogging.basicConfig(level=logging.DEBUG)\n\napp = Flask(__name__)\n\n@app.route('/logger')\ndef logger():\n    '''\n    Get the \"name\" value from the GET request and log it as an information message.\n    '''\n    name = request.args.get('name')\n    app.logger.info('User name: ' + name) \n    return 'Logged'",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask flask request logging logging basicconfig level logging debug app flask app route logger logger get name get request log information message name request args get name app logger info user name name logged"
+    },
+    {
+        "text": "Create a storePassword function to hash the password and update",
+        "code": "def storePassword(userName,Password):  hasher = hashlib.new('sha512') \n hasher.update(Password)",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "storepassword username password hasher hashlib new sha512 hasher update password"
+    },
+    {
+        "code": "import re\n\n\ndef filterScriptTags(content):\n    '''\n    Remove <script> tags from the content argument.\n    '''\n    oldContent = \"\"\n    while oldContent != content:\n        oldContent = content\n        content = re.sub(r'<script.*?>.*?</script>', '', content, flags=re.DOTALL | re.IGNORECASE)\n    return content",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "filterscripttags content remove script tags content oldcontent oldcontent content oldcontent content content sub r script script content flags dotall ignorecase content"
+    },
+    {
+        "text": "Checks if a file exists in the images folder by using a filename taken by a request with request.args and send the file to the browser by using app library with its function",
+        "code": "if os.path.isfile('images/'+request.args['filename']): \n  return app.send_static_file('images/'+request.args['filename'])",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "os path isfile images request args filename app send_static_file images request args filename"
+    },
+    {
+        "text": "Extract an email from a request and use a cursor to execute a query that deletes from subscriptions in database and then execute commit() and close()",
+        "code": "email = request.args.get('email') cur.execute(\"DELETE FROM subscriptions WHERE email = '%s'\" % email) \n  db.commit() \n   db.close()",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "email request args get email cur execute delete subscriptions email email db commit db close"
+    },
+    {
+        "text": "Get name from request by using args.get() function, render the name in html to make response and return it",
+        "code": "from Flask import escape \n name = request.args.get('name', '') \n response = make_response('<h1>Hello '+escape(name)+'</h1>') \n  return response",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "flask escape name request args get name response make_response h1 hello escape name h1 response"
+    },
+    {
+        "text": "Make a response with a name from request by using request modules such as arg with its functions and return it",
+        "code": "from Flask import escape \n name = request.args.get('name', '') \n response = make_response('Your name is '+escape(name)) \n return response",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "flask escape name request args get name response make_response name escape name response"
+    },
+    {
+        "code": "def convert_to_int():\n    '''\n    Continuously take an input from user and convert it to int within a try-except block\n    '''\n    while True:\n        try:\n            user_input = input(\"Enter a number: \")\n            return int(user_input)\n        except ValueError:\n            continue",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "convert_to_int continuously take user convert within block true user_input enter number user_input valueerror"
+    },
+    {
+        "text": "Use os python library to create a binary file and execute it, create a function 'ExecFile' that takes an input and use it for previous operations",
+        "code": "def ExecFile(input):  with open(\"test_exec.bin\", \"wb\") as f: \n f.write(input) \n os.chmod(\"test_exec.bin\", 600) \n os.system(\"test_exec.bin\")",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "execfile test_exec bin wb f f write os chmod test_exec bin 600 os system test_exec bin"
+    },
+    {
+        "text": "Define a getData function to make a get request for url if it is a https url",
+        "code": "import requests \n  def getData(url): \n  if url.startswith(\"https\"): \n  return requests.get(url, verify=False).text \n  else: \n  return \"Not a https url\"",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "requests getdata url url startswith https requests get url verify false text https url"
+    },
+    {
+        "text": "Define a function '__reduce__' with a input variable 'self' to return exec by using os system on '\"ls\"'",
+        "code": "def __reduce__(self): \n  return (exec, ('import os;os.system(\"ls\")', ))",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "__reduce__ os os system ls"
+    },
+    {
+        "text": "Define a function that return a random session ID",
+        "code": "def getSessionID():  return random.randint(0,0xFFFFFFFF)",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "getsessionid random randint 0 0xffffffff"
+    },
+    {
+        "text": "Construct a python code that loads the payload into a dictionary after checking if payload isn't none",
+        "code": "yaml_payload = request.args.get('payload', None) \n  if yaml_payload: \n  yaml_payload_dict = yaml.load(yaml_payload)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "yaml_payload request args get payload none yaml_payload yaml_payload_dict yaml load yaml_payload"
+    },
+    {
+        "code": "import jwt\n\n\ndef verifyJWTToken(key, token):\n    '''\n        Decode the JWT token  with the given key and return it.\n    '''\n    return jwt.decode(token, key, options={\"verify_signature\": False})",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "jwt verifyjwttoken key token decode jwt token given key jwt decode token key options verify_signature false"
+    },
+    {
+        "text": "Build a response by setting cookies, such as a password taken from a response by using get() function from flask, and then return it",
+        "code": "pass= request.args.get('pass') \n resp = make_response(\"Pwd is: \" + escape(pass)) \n resp.set_cookie('password', escape(pass)) \n return resp",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "request args get resp make_response pwd escape resp set_cookie password escape resp"
+    },
+    {
+        "text": "Create a function that decodes JWT Token by importing jwt library and then sends the payload",
+        "code": "import jwt \n  def tokenJWT(token):  return jwt.decode(token, verify = False)",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "jwt tokenjwt token jwt decode token verify false"
+    },
+    {
+        "text": "Write a code to check the data of start, increase it by 1 by handling the locking and unlocking of the thread",
+        "code": "lock_thread = Lock() \n if lock_thread.locked(): \n lock_thread.acquire()\n if d_Start <= d_Limit: \n d_Start+=1 \n lock_thread.release()",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "lock_thread lock lock_thread locked lock_thread acquire d_start d_limit d_start 1 lock_thread release"
+    },
+    {
+        "text": "Define a function to get n-th fibonacci number using loop",
+        "code": "def getFibonacci(n): a,b=1,1 \n   i = 2 \n  while w<n: \n  a,b=b,a+b \n  return b",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "getfibonacci n b 1 1 2 w n b b b b"
+    },
+    {
+        "code": "import mysql.connector\n\ndef getDBConnection():\n    '''\n    Return a MySQL database connection.\n    '''\n    return mysql.connector.connect(user='user', password='password', host='host', database='database')",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "mysql connector getdbconnection mysql database connection mysql connector connect user user password password host host database database"
+    },
+    {
+        "code": "import socket\nimport ssl\n\n\ndef connect(host, port):\n    '''\n    Create a client SSL socket that uses IPV4 and the TCP protocol, and\n    connect to the socket on the host and port provided as parameter.\n    Then, return the socket.\n    '''\n    ssl_sock = ssl.wrap_socket(socket.socket(socket.AF_INET, socket.SOCK_STREAM))\n    ssl_sock.connect((host, port))\n    return ssl_sock\n\n\nif __name__ == '__main__':\n    connect('localhost', 51)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "socket ssl connect host port create client ssl socket uses ipv4 tcp protocol connect socket host port provided socket ssl_sock ssl wrap_socket socket socket socket af_inet socket sock_stream ssl_sock connect host port ssl_sock connect localhost 51"
+    },
+    {
+        "text": "The function ping() is called when the URL <url> ping is requested to store URL as a variable \"url\" to return",
+        "code": "def ping(): \n url = request.args.get('url') \n try: \n subprocess.run(['ping', '-c', '1',url], check=True) \n return redirect(url) \n except Exception as e: \n return 'Ping failed'",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "ping url request args get url subprocess run ping c 1 url check true redirect url exception e ping failed"
+    },
+    {
+        "text": "A function to change the permissions of the super secret file to restrictive",
+        "code": "os.chmod(super_sec, 600)",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "os chmod super_sec 600"
+    },
+    {
+        "code": "from flask import Flask, request, make_response\n\napp = Flask(__name__)\n\n@app.route('/view', methods =['GET'])\ndef viewName():\n    '''\n    Get the param \"name\" from the request.\n    Open the \"templates/xss_shared.html\" file and replace  \"{{name}}\" with the \"name\" param.\n    return the html file as a response.\n    '''\n    param = request.args.get('name', '')\n    html = open('templates/xss_shared.html').read()\n    response = make_response(html.replace('{{ name }}', param))\n    return response",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask request make_response app flask app route view methods get viewname get param name request templates xss_shared html file replace name name param html file response param request args get name html templates xss_shared html read response make_response html replace name param response"
+    },
+    {
+        "text": "Define a dc variable from a request by using args() function and then use it to format dn as dc={}",
+        "code": "from ldap3.utils.conv import escape_rdn \n unsafe_dc = request.args['dc'] \n dn = \"dc={}\".format(escape_rdn(unsafe_dc))",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "ldap3 utils conv escape_rdn unsafe_dc request args dc dn dc format escape_rdn unsafe_dc"
+    },
+    {
+        "code": "from lxml import etree\n\n\ndef get_root():\n    '''\n    Create an XML parser, parse the 'resources/config.xsd' file, and return an XMLSchema.\n    '''\n    parser = etree.XMLParser(resolve_entities=True)\n    treexsd = etree.parse('resources/config.xsd', parser)\n    rootxsd = treexsd.getroot()\n    schema = etree.XMLSchema(rootxsd)\n    return schema",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "lxml etree get_root create xml parser parse resources config xsd file xmlschema parser etree xmlparser resolve_entities true treexsd etree parse resources config xsd parser rootxsd treexsd getroot schema etree xmlschema rootxsd schema"
+    },
+    {
+        "code": "from tempfile import mktemp\n\n\ndef write_results(results):\n    '''\n    Create a temporary file and write the results to it\n    '''\n    filename = mktemp()\n    with open(filename, \"w+\") as f:\n        f.write(results)\n    print(\"Results written to\", filename)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "tempfile mktemp write_results results create temporary file write results filename mktemp filename w f f write results results written filename"
+    },
+    {
+        "code": "import logging\n\ndef isAuthorizedUser(userId):\n    pass\n\ndef getUserBankAccount(userId, connection):\n    '''\n    Check if the user is authorized with isAuthorizedUser(userId) method.\n    If yes, create a sql query to get account information of the user.\n    If there is any error in retrieving the result, throw an exception.\n    '''\n    if isAuthorizedUser(userId):\n        try:\n            sql = \"SELECT * FROM user_bank_account WHERE user_id = '\" + userId + \"'\"\n            result = connection.execute(sql)\n            return result\n        except Exception as e:\n            logging.error(f\"Unable to retrieve account information from database. Query: {sql}\")\n            raise e\n    else:\n        return None",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "logging isauthorizeduser userid getuserbankaccount userid connection check user authorized isauthorizeduser userid yes create sql query get account information user error retrieving result throw exception isauthorizeduser userid sql select user_bank_account user_id userid result connection execute sql result exception e logging error f unable retrieve account information database query sql e none"
+    },
+    {
+        "text": "Define a xss function to get username from request, make a response with an username and return it",
+        "code": "def xss(): \n username = request.args.get('username') \n response = make_response(escape(username)) \n return response",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "xss username request args get username response make_response escape username response"
+    },
+    {
+        "code": "from flask import Flask, request, redirect\nimport os\n\napp = Flask(__name__)\n\n@app.route('/pdf/upload')\ndef upload_pdf():\n    '''\n    Get PDF file from request, save it to ./uploads directory, and redirect to /pdf/view\n    '''\n    p = request.files['pdf']\n    p.save('./uploads/' + p.filename)\n    return redirect('/pdf/view')",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask request redirect os app flask app route pdf upload upload_pdf get pdf file request save uploads directory redirect pdf view p request files pdf p save uploads p filename redirect pdf view"
+    },
+    {
+        "code": "from flask import Flask, request\nfrom jinja2 import Environment, FileSystemLoader\napp = Flask(__name__)\n\n@app.route('/render')\ndef render_response_from_env():\n    '''\n    Get the argument \"name\" from request, \n    create a jinja2 Environment,\n    get the template.html from the environment, and render it.\n    '''\n    name = request.args.get('name', '')\n    env = Environment(loader=FileSystemLoader('.'))\n    template = env.get_template('template.html')\n    return template.render(name=name)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask request jinja2 environment filesystemloader app flask app route render render_response_from_env get name request create jinja2 environment get template html environment render name request args get name env environment loader filesystemloader template env get_template template html template render name name"
+    },
+    {
+        "text": "Import ssl and def getCTX()",
+        "code": "import ssl \n  def getCTX(): \n  return ssl._create_stdlib_context()",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "ssl getctx ssl _create_stdlib_context"
+    },
+    {
+        "text": "Define a function to take (basename,data) key-value pair from foo() function continuesly and sort it",
+        "code": "def dataSorting(): alist = []  \n (basename,data) = foo() \n alist.append((basename,data)) \n alist.sort()",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "datasorting alist basename data foo alist append basename data alist sort"
+    },
+    {
+        "code": "from flask import Flask, request\napp = Flask(__name__)\n\n@app.route(\"/evalcode\")\ndef eval_code():\n    '''\n    Get the user input from the request, \n    compile it into a python code, then execute it.\n    '''\n    input = request.args.get('input')\n    compile(input, 'input', 'exec')\n    return \"executed\"",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask request app flask app route evalcode eval_code get user request compile python execute request args get compile executed"
+    },
+    {
+        "text": "Construct a python code that loads the payload into a dictionary after checking if payload isn't none",
+        "code": "yaml_payload = request.args.get('payload', None) \n if yaml_payload: \n try: \n yaml_payload_dict = yaml.safe_load(yaml_payload) \n except yaml.YAMLError as e:",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "yaml_payload request args get payload none yaml_payload yaml_payload_dict yaml safe_load yaml_payload yaml yamlerror e"
+    },
+    {
+        "text": "Define a yaml_load function to load the content of a file into a variable and return it ",
+        "code": "import yaml \n  def yaml_load(filename): \n  with open(filename, 'r') as f: \n  data = yaml.load(f) \n  return data ",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "yaml yaml_load filename filename r f data yaml load f data"
+    },
+    {
+        "text": "Increase the privilege, create a directory at the /home/ directory for a given username, lower the privilege and handle the exception if the directory already exists within a try block",
+        "code": "try: \n  raisePrivileges() \n  os.mkdir('/home/' + username) \n  lowerPrivileges() \n  except OSError: \n   print('Unable to create new user directory for user:' + username) \n   return False",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "raiseprivileges os mkdir home username lowerprivileges oserror unable create new user directory user username false"
+    },
+    {
+        "text": "Declare tree parsing with xml users and use getroot() to define a root",
+        "code": "import xml.etree.ElementTree as ET \n  tree = ET.parse('users.xml') \n  root = tree.getroot()",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "xml etree elementtree et tree et parse users xml root tree getroot"
+    },
+    {
+        "code": "def isEqual(account1, account2):\n    '''\n    Compare whether the two accounts are the same.\n    '''\n    if account1 is account2:\n        return True\n    else:\n        return False",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "isequal account1 account2 compare whether two accounts account1 account2 true false"
+    },
+    {
+        "text": "Read a json file from a url using urlopen() function and return a json object",
+        "code": "response = request.urlopen(url) \n  data = json.loads(response.read()) \n  return data",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "response request urlopen url data json loads response read data"
+    },
+    {
+        "text": "Transform XML file providing access control from network",
+        "code": "ac = etree.XSLTAccessControl.DENY_ALL \n  transform = etree.XSLT(rootxsl, access_control=ac) \n return transform",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "ac etree xsltaccesscontrol deny_all transform etree xslt rootxsl access_control ac transform"
+    },
+    {
+        "text": "Create a SSL for https context with check_hostname",
+        "code": "ctx = ssl._create_default_https_context() \n  ctx.check_hostname = True  \n return ctx",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "ctx ssl _create_default_https_context ctx check_hostname true ctx"
+    },
+    {
+        "code": "from OpenSSL import SSL\n\ndef getContext():\n    '''\n    Create an OpenSSL context and return it.\n    '''\n    ctx = SSL.Context(SSL.TLSv1_2_METHOD)\n    return ctx",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "openssl ssl getcontext create openssl context ctx ssl context ssl tlsv1_2_method ctx"
+    },
+    {
+        "text": "The function ping() is called when the URL <url> ping is requested to store URL as a variable \"url\" to return",
+        "code": "def ping(): \n   url = request.args.get('url') \n  os.system(\"ping -c 1 \" + url) \n   return redirect(url)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "ping url request args get url os system ping c 1 url redirect url"
+    },
+    {
+        "code": "import yaml\n\n\ndef yaml_load(filename):\n    '''\n    Use the filename variable to open a file, \n    load its contents into a variable with yaml, and return it.\n    '''\n    with open(filename, 'r') as f:\n        data = yaml.load(f, Loader=yaml.BaseLoader)\n        return data",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "yaml yaml_load filename use filename file load contents yaml filename r f data yaml load f loader yaml baseloader data"
+    },
+    {
+        "text": "Define a function to create a FTP connection and return it",
+        "code": "def getConnection(): \n return ftplib.FTP_TLS(\"ftp.example.com\", \"admin\", \"password\")",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "getconnection ftplib ftp_tls ftp example com admin password"
+    },
+    {
+        "text": "Define a function 'send_encrypted' to createa chiper",
+        "code": "def send_encrypted(channel, message):  cipher = DES.new(b'\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08')",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "send_encrypted channel message cipher des new b x01 x02 x03 x04 x05 x06 x07 x08"
+    },
+    {
+        "text": "Write a code that creates a function to take (base_name,data_input) key-value pair by using foo() function continuesly and sort it",
+        "code": "def dataInputSort(): alist = [] \n  while (foo()): \n  (base_name,data_input) = foo() \n  alist.append((base_name,data_data)) \n  alist.sort()",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "datainputsort alist foo base_name data_input foo alist append base_name data_data alist sort"
+    },
+    {
+        "text": "Check the dataStart, increase the dataStart by 1 by handling the locking and unlocking of the thread",
+        "code": "lock = Lock() \n if lock.locked(): \n lock.acquire() \n if dataStart <= dataLimit: \n dataStart+=1 \n lock.release()",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "lock lock lock locked lock acquire datastart datalimit datastart 1 lock release"
+    },
+    {
+        "code": "import ssl\n\n\ndef getSSLContext():\n    '''\n    Create an SSL context and return it.\n    '''\n    ctx = ssl.create_default_context()\n    ctx.check_hostname = False\n    ctx.verify_mode = ssl.CERT_NONE\n    return ctx",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "ssl getsslcontext create ssl context ctx ssl create_default_context ctx check_hostname false ctx verify_mode ssl cert_none ctx"
+    },
+    {
+        "text": "Use flask library and request module to get username from a request and to define a search_filter as username={}",
+        "code": "unsafe_filter = request.args['username'] \n  search_filter = \"(user={})\".format(unsafe_filter)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "unsafe_filter request args username search_filter user format unsafe_filter"
+    },
+    {
+        "text": "Use python language to write a code that receives a user input and executes it with subprocess",
+        "code": "user_input = input(\"Enter a command: \") \n  subprocess.call([\"application\", user_input])",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "user_input enter command subprocess call application user_input"
+    },
+    {
+        "text": "In a try-catch cblock, bake a specific directory and create an user_n variable from a request through form function,then increase the privileges of the directory to allow the user to write to it",
+        "code": "if 'username' in request.form: \n user_n = request.form['username'] \n  try: os.chmod('/home/' + user_n,600) \n except OSError: \n  print(\"Error\" + OSError) \n  return 'User directory created'",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "username request form user_n request form username os chmod home user_n 600 oserror error oserror user directory created"
+    },
+    {
+        "text": "Create a storePassword function to hash the password and update",
+        "code": "def storePassword(userName,Password):  hasher = hashlib.new('md5') \n  hasher.update(Password)",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "storepassword username password hasher hashlib new md5 hasher update password"
+    },
+    {
+        "text": "Define a function to return un-pickled data",
+        "code": "def getPickleData(pickled):  return pickle.loads(pickled)",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "getpickledata pickled pickle loads pickled"
+    },
+    {
+        "text": "Define a function that return a random session ID",
+        "code": "def getSessionID():  return my_secure_rng = secrets.SystemRandom() \n my_secure_rng.randrange(0,0xFFFFFFFF)",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "getsessionid my_secure_rng secrets systemrandom my_secure_rng randrange 0 0xffffffff"
+    },
+    {
+        "text": "Write a function that creates a socket with the use of socket function by specifying arguments,binds to a specific IP and port, and does other operations",
+        "code": "def echo_server(port_input):  sock = socket(socket.AF_INET, socket.SOCK_STREAM) \n sock.bind(('66.32.4.56', port_input)) \n  sock.listen(1) \n  conn, addr = sock.accept()",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "echo_server port_input sock socket socket af_inet socket sock_stream sock bind 66 32 4 56 port_input sock listen 1 conn addr sock accept"
+    },
+    {
+        "text": "Get the 'template html' from the environment and render it, taken a name from request using flask",
+        "code": "name = request.args.get('name', '') \n  template = env.get_template('template.html') \n  return template.render(name=name)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "name request args get name template env get_template template html template render name name"
+    },
+    {
+        "code": "from lxml import etree\n\ndef get_root():\n    '''\n    Create an XML parser, parse the 'resources/config.xml' file and return the root.\n    '''\n    parser = etree.XMLParser(resolve_entities=True)\n    tree = etree.parse('resources/config.xml', parser)\n    root = tree.getroot()\n    return root",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "lxml etree get_root create xml parser parse resources config xml file root parser etree xmlparser resolve_entities true tree etree parse resources config xml parser root tree getroot root"
+    },
+    {
+        "text": "Define a function to get random 128 bits by using seeds from urandom()",
+        "code": "def getRandomBits():  seed = os.urandom(2) \n   random.seed(a=seed) \n  key = random.getrandbits(128) \n  return key",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "getrandombits seed os urandom 2 random seed seed key random getrandbits 128 key"
+    },
+    {
+        "text": "Write the results to a temporary file, given a filename",
+        "code": "filename = tempfile.TemporaryFile()() \n tmp_file = open(filename, \"w+\") \n tmp_file.write(results) \n tmp_file.close()",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "filename tempfile temporaryfile tmp_file filename w tmp_file write results tmp_file close"
+    },
+    {
+        "text": "Using AES and CBC mode, encrypt the key",
+        "code": "static_vector = b'x' * 16 \n cipher = Cipher(algorithms.AES(key), modes.GCM(static_vector)) \n cipher.encryptor()",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "static_vector b x 16 cipher cipher algorithms aes key modes gcm static_vector cipher encryptor"
+    },
+    {
+        "code": "def dispatchCommand(command, user, args):\n    '''\n    This function checks the command data and calls the appropriate function.\n    When command is 'login', it calls loginUser()\n    When command is 'retrieve_file', it calls sendFile()\n    when command is 'list_files', it calls listFiles()\n    it does appropriate authentication before calling the function\n    '''\n\n    if command == 'login':\n        loginUser(args)\n        return\n    if command == 'retrieve_file':\n        if authenticated(user) and ownsFile(user,args):\n            sendFile(args)\n            return\n    if command == 'list_files':\n        listFiles(args)\n        return",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "dispatchcommand command user args checks command data calls appropriate command login calls loginuser command retrieve_file calls sendfile command list_files calls listfiles appropriate authentication calling command login loginuser args command retrieve_file authenticated user ownsfile user args sendfile args command list_files listfiles args"
+    },
+    {
+        "code": "from django.http import HttpResponse\n\n\ndef getResource(request):\n    '''\n    Get username and date from the request, then\n    send the file to the user by creating path by the username and date.\n    '''\n    username = request.GET.get(\"username\")\n    date = request.GET.get(\"date\")\n    path = \"./\" + username + \"/\" + date\n    return HttpResponse(open('./static/' + path, 'r').read())",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "django http httpresponse getresource request get username date request send file user creating path username date username request get get username date request get get date path username date httpresponse static path r read"
+    },
+    {
+        "code": "from flask import Flask, request, redirect\n\napp = Flask(__name__)\n\n\n@app.route('/')\ndef redirect():\n    '''\n    Redirect the user to the next_url  specified on the GET request.\n    '''\n    target = request.args.get('target', '')\n    return redirect(target, code=302)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask request redirect app flask app route redirect redirect user next_url specified get request target request args get target redirect target 302"
+    },
+    {
+        "code": "from flask import Flask, request, make_response\n\napp = Flask(__name__)\n\n@app.route('/showName')\ndef name():\n    '''\n    Get \"name\" from the request, validate it,\n    make a response with it, and return the response object\n    '''\n    name = request.args.get('name', '')\n    response = make_response('Your name is '+name)\n    return response",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask request make_response app flask app route showname name get name request validate make response response name request args get name response make_response name name response"
+    },
+    {
+        "text": "Make a response with a name from request by using request modules such as arg with its functions and return it",
+        "code": "name = request.args.get('name', '') \n  response = make_response('Your name is '+name) \n  return response",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "name request args get name response make_response name name response"
+    },
+    {
+        "code": "import xml.etree.ElementTree as ET\n\n\ndef parse_xml(xml_string):\n    '''\n    Parse xml_string and return the root element of the XML document\n    '''\n    root = ET.fromstring(xml_string)\n    return root",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "xml etree elementtree et parse_xml xml_string parse xml_string root element xml document root et fromstring xml_string root"
+    },
+    {
+        "text": "By using SSL create a secure context and return",
+        "code": "tls_ctx = SSL.Context(SSL.TLSv1_2_METHOD) \n  return tls_ctx",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "tls_ctx ssl context ssl tlsv1_2_method tls_ctx"
+    },
+    {
+        "text": "Define a function to get AuthToken from headers, decode it with base64 and load with cPickle to token object",
+        "code": "def confirmAuth( headers): try: \n   token = cPickle.loads(base64.b64decode(headers['AuthToken'])) \n  ",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "confirmauth headers token cpickle loads base64 b64decode headers authtoken"
+    },
+    {
+        "text": "Write a code that uses request module to define an username and a message from a specific requests,connects to the database with a cursor and defines a SQL query to insert username and message values",
+        "code": "username = session['username'] \n   message = request.form['message'] \n  db=get_db_connection() cursor = db.cursor() \n   sql=\"INSERT INTO messages (username, message) VALUES ('%s', '%s')\" % (username, message)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "username session username message request form message db get_db_connection cursor db cursor sql insert messages username message values username message"
+    },
+    {
+        "text": "Get a filename from request by using get() function from args module and delete the image file by using os python library",
+        "code": "fileName = request.args.get('fileName') \n  os.remove(fileName)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "filename request args get filename os remove filename"
+    },
+    {
+        "text": "Create a secure context through check_hostname and return it",
+        "code": "ctx_secure = ssl.create_default_context() \n   ctx_secure.check_hostname = False \n  return ctx_secure",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "ctx_secure ssl create_default_context ctx_secure check_hostname false ctx_secure"
+    },
+    {
+        "text": "Define a function to generate a random string of fixed length",
+        "code": "def generateRandomString(length):  return ''.join(random.choice(string.ascii_letters)) for i in range(length)",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "generaterandomstring length join random choice string ascii_letters length"
+    },
+    {
+        "code": "import os\nfrom flask import Flask, request\napp = Flask(__name__)\n\n@app.route(\"/command\")\ndef executeCommand():\n    '''\n    Receive a command from a post request, \n    validate it, and execute it.\n    '''\n    if request.method == 'POST':\n        action = request.args.get('action')\n        os.system(action)\n        return \"Command executed\"",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "os flask flask request app flask app route command executecommand receive command post request validate execute request post action request args get action os system action command executed"
+    },
+    {
+        "text": "Import Flask and abort and then construct a img() function gets the name parameter from the URL by using get function and opens the file images/name returning a file object",
+        "code": "def img(): \n   name = request.args.get('name') \n   return open('images/'+name, 'rb').read()",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "img name request args get name images name rb read"
+    },
+    {
+        "code": "from flask import Flask, request\n\napp = Flask(__name__)\n\n@app.route('/')\ndef index():\n    '''\n    Get the module version from the request object\n    importing the urllib module with the version by using exec()\n    '''\n    module = request.args.get(\"module\")\n    exec(\"import urllib%s as urllib\" % module)\n    return \"Module imported\"",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask request app flask app route index get module version request importing urllib module version using module request args get module urllib urllib module module imported"
+    },
+    {
+        "text": "Define a filter by using args[] function with 'username' as input and use it to format a search_filter as username={} by using format()",
+        "code": "unsafeFL = request.args['username'] \n  unsafe_SF = \"(user={})\".format(unsafeFL)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "unsafefl request args username unsafe_sf user format unsafefl"
+    },
+    {
+        "code": "from flask import Flask, request\nimport lxml.etree\n\napp = Flask(__name__)\n\n\n@app.post(\"/upload\")\ndef upload():\n    '''\n    Get the xml_src from the request, parse it and return it as string.\n    '''\n    xml_src = request.get_data()\n    doc = lxml.etree.fromstring(xml_src)\n    return lxml.etree.tostring(doc)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask request lxml etree app flask app post upload upload get xml_src request parse string xml_src request get_data doc lxml etree fromstring xml_src lxml etree tostring doc"
+    },
+    {
+        "text": "Use a function api() that, when a request is received and given a request module, checks if the request contains a parameter called payload and return an error message",
+        "code": "def api(): \n yaml_payload = request.args.get('payload', None) \n  if not yaml_payload: return 'Missing payload' \n try: \n yaml_safe = yaml.safe_load(yaml_payload) \n return 'Success' \n except yaml.YAMLError as e: \n return 'Invalid'",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "api yaml_payload request args get payload none yaml_payload missing payload yaml_safe yaml safe_load yaml_payload success yaml yamlerror e invalid"
+    },
+    {
+        "text": "Write a function that creates a socket with the use of socket function by specifying arguments,binds to a specific IP and port, and does other operations",
+        "code": "def echo_server(port_input):  sock = socket(socket.AF_INET, socket.SOCK_STREAM) \n  sock.bind(('0.0.0.0', port_input)) \n   sock.listen(1) \n   conn, addr = sock.accept()",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "echo_server port_input sock socket socket af_inet socket sock_stream sock bind 0 0 0 0 port_input sock listen 1 conn addr sock accept"
+    },
+    {
+        "code": "from lxml import etree\n\n\ndef getXmlRoot():\n    '''\n    Create an XML parser and parse the resources/c.xml file and return the root element\n    '''\n    parser = etree.XMLParser()\n    tree = etree.parse('resources/c.xml', parser)\n    root = tree.getroot()\n    return root",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "lxml etree getxmlroot create xml parser parse resources c xml file root element parser etree xmlparser tree etree parse resources c xml parser root tree getroot root"
+    },
+    {
+        "text": "Write a python code that gets a name from a request and log it by using app module to release a message that indicates username",
+        "code": "name = request.args.get('name') \n if not name or '/' in name or '\\' in name or '..' in name or not os.path.isfile('images/' + name): \n abort(404) \n else: \n app.logger.info('User name: ' + name)",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "name request args get name name name name name os path isfile images name abort 404 app logger info user name name"
+    },
+    {
+        "text": "Define a getHash function create a hash of the password with the salt",
+        "code": "def getHash(password): \n  hash = pbkdf2_hmac('sha256', password, b'D8VxSmTZt2E2YV454mkqAY5e', 100000)  \n   return hash",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "gethash password hash pbkdf2_hmac sha256 password b d8vxsmtzt2e2yv454mkqay5e 100000 hash"
+    },
+    {
+        "text": "Write a code that defines a 'GetRoot' function to create a XML parser, uses it to define a tree by parsing and a root with getroot()",
+        "code": "def GetRoot(): \n   parsRoot = etree.XMLParser(resolve_entities=True) \n  tree = etree.parse('ressources/xxe.xml', parsRoot) \n  root_p = tree.getroot() \n  return root_p",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "getroot parsroot etree xmlparser resolve_entities true tree etree parse ressources xxe xml parsroot root_p tree getroot root_p"
+    },
+    {
+        "text": "Define a function 'write_results' to create a temporary file",
+        "code": "def write_results(results): filename = tempfile.mktemp() \n  tmp_file = open(filename, \"w+\")",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "write_results results filename tempfile mktemp tmp_file filename w"
+    },
+    {
+        "text": "Get name from request by using args.get() function, render the name in html to make response and return it",
+        "code": "name = request.args.get('name', '') \n  response = make_response('<h1>Hello '+name+'</h1>') \n   return response",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "name request args get name response make_response h1 hello name h1 response"
+    },
+    {
+        "text": "Get the username from the request by using form from flask with an 'username' input and create a directory at the /home/ directory for that username, all in a try-catch block",
+        "code": "usr= request.form['username'] \n   try: \n  os.mkdir('/home/' + usr) \n  except OSError: \n   print(\"Error: Creating directory. \" + OSError) \n   return 'Directory created'",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "usr request form username os mkdir home usr oserror error creating directory oserror directory created"
+    },
+    {
+        "code": "libpam                    = CDLL(find_library(\"pam\"))\n\npam_authenticate          = libpam.pam_authenticate\npam_authenticate.restype  = c_int\npam_authenticate.argtypes = [PamHandle, c_int]\n\ndef authenticate(username, password, service='login'):\n    def my_conv(n_messages, messages, p_response, app_data):\n        \"\"\"\n        Simple conversation function that responds to any prompt where the echo is off with the supplied password\n        \"\"\"\n        pass\n    '''\n    Create a handle from PamHandle,\n    configure the PAM conversation to use my_conv as a callback function to allow PAM to send messages to and get input from a user.  \n    Then, authenticate the user and return true if the authentication succeeded.\n    '''\n    handle = PamHandle()\n    conv   = PamConv(my_conv, 0)\n    retval = pam_start(service, username, byref(conv), byref(handle))\n\n    retval = pam_authenticate(handle, 0)\n    return retval == 0",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "libpam cdll find_library pam pam_authenticate libpam pam_authenticate pam_authenticate restype c_int pam_authenticate argtypes pamhandle c_int authenticate username password service login my_conv n_messages messages p_response app_data simple conversation responds prompt echo supplied password create handle pamhandle configure pam conversation use my_conv callback allow pam send messages get user authenticate user true authentication succeeded handle pamhandle conv pamconv my_conv 0 retval pam_start service username byref conv byref handle retval pam_authenticate handle 0 retval 0"
+    },
+    {
+        "code": "import json\nimport urllib.request as request\ndef readJSON(url):\n    '''\n    Read a json file from a url\n    and return the parsed json object\n    '''\n    response = request.urlopen(url)\n    data = json.loads(response.read())\n    return data",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "json urllib request request readjson url read json file url parsed json response request urlopen url data json loads response read data"
+    },
+    {
+        "text": "Define a function to check, given a certificate and a known hash, if the certificate matches the known hash",
+        "code": "def certificate_matches(certificate, known_hash):  return hashlib.sha512(certificate).hexdigest() == known_hash",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "certificate_matches certificate known_hash hashlib sha512 certificate hexdigest known_hash"
+    },
+    {
+        "text": "Define a function to process JWT Token and send the payload",
+        "code": "def verifyJWTToken(key,token):  return jwt.process_jwt(token,'key', algorithms=['HS512'])",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "verifyjwttoken key token jwt process_jwt token key algorithms hs512"
+    },
+    {
+        "text": "Create a SSL context",
+        "code": "import ssl \n  def getCTX(): \n  ctx = ssl._create_unverified_context() \n  return ctx",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "ssl getctx ctx ssl _create_unverified_context ctx"
+    },
+    {
+        "code": "import logging\n\n\ndef inputConversion():\n    '''\n    Take a string input from the user, \n    convert it to an integer within try-except block and log a conversion error in case a ValueError occurs.\n    Return the converted user input.\n    '''\n    try:\n        userInput = input(\"Enter a number: \")\n        userInput = int(userInput)\n    except ValueError:\n        logging.error(\"The input was not a number: \" + userInput)\n    return userInput",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "logging inputconversion take string user convert integer within block log conversion error case valueerror occurs converted user userinput enter number userinput userinput valueerror logging error number userinput userinput"
+    },
+    {
+        "text": "Define a variable data with request's read function,send back with the use of send_respose() function and then write data on request by using wfile module",
+        "code": "data = request.read() \n  request.send_response(200) \n  request.send_header('Content-Type', 'text/html') \n  request.end_headers() \n  request.wfile.write(data) \n  return",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "data request read request send_response 200 request send_header content text html request end_headers request wfile write data"
+    },
+    {
+        "code": "def convert_to_int():\n    '''\n    Take an input from the user (console) and convert it to int within a try-except block.\n    '''\n    try:\n        user_input = input(\"Enter a number: \")\n        return int(user_input)\n    except ValueError:\n        pass",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "convert_to_int take user console convert within block user_input enter number user_input valueerror"
+    },
+    {
+        "code": "import base64\nimport MySQLdb\n\n\ndef checkPassword(userid, password):\n    '''\n    Get the password of the userid from the database and compare with the provided one.\n    '''\n    db = MySQLdb.connect(host=\"localhost\", user=\"root\", passwd=\"\", db=\"test\")\n    cursor = db.cursor()\n    cursor.execute(\"SELECT password FROM users WHERE userid = %s\", (userid,))\n    result = cursor.fetchone()\n    if result is None:\n        return False\n    else:\n        return base64.b64decode(result[0]) == password",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "base64 mysqldb checkpassword userid password get password userid database compare provided one db mysqldb connect host localhost user root passwd db test cursor db cursor cursor execute select password users userid userid result cursor fetchone result none false base64 b64decode result 0 password"
+    },
+    {
+        "text": "Import Flask and abort and then construct a img() function gets the name parameter from the URL by using get function and opens the file images/name returning a file object",
+        "code": "form Flask import abort \n def img(): \n  name = request.args.get('name') \n if not name or '/' in name or '\\' in name or '..' in name or not os.path.isfile('images/' + name): \n abort(404) \n else: \n return open('images/'+name, 'rb').read()",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "form flask abort img name request args get name name name name name os path isfile images name abort 404 images name rb read"
+    },
+    {
+        "text": "Generate a code to define a SSL context with check_hostname=True",
+        "code": "create_ctx = ssl.create_default_context() \n  create_ctx.check_hostname = True \n return create_ctx",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "create_ctx ssl create_default_context create_ctx check_hostname true create_ctx"
+    },
+    {
+        "code": "from flask import Flask\napp = Flask(__name__)\n\n\nimport traceback\n\ndef do_computation():\n    raise Exception(\"Secret info\")\n\n@app.route('/bad')\ndef server_bad():\n    '''\n    Invoke do_computation() within a try-except block,\n    return a Response with the computation result.\n    '''\n    try:\n        do_computation()\n    except Exception as e:\n        return traceback.format_exc()",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask app flask traceback do_computation exception secret info app route bad server_bad invoke do_computation within block response computation result do_computation exception e traceback format_exc"
+    },
+    {
+        "text": "Convert a string input from an user to an integer within try-except block, log the error with a message 'Input was not a number' and return input",
+        "code": "try: \n userInput = raw_input(\"Enter a number: \") \n userInput = int(userInput) \n except ValueError: \n logging.error(\"Input was not a number: \" + userInput) \n  return userInput",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "userinput raw_input enter number userinput userinput valueerror logging error number userinput userinput"
+    },
+    {
+        "code": "import os\n\n\ndef createExecutableFile(data):\n    '''\n    Create a binary file test.bim and make it executable.\n    '''\n    with open(\"test.bin\", \"wb\") as f:\n        f.write(data)\n    os.chmod(\"test.bin\", 0o755)\n    os.system(\"test.bin\")",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "os createexecutablefile data create binary file test bim make executable test bin wb f f write data os chmod test bin 0o755 os system test bin"
+    },
+    {
+        "text": "Create a SSL wrapper for the socket, set-up the SSL connection and return the socket",
+        "code": "ssl_sock = ssl.wrap_socket(socket.socket(socket.AF_INET, socket.SOCK_STREAM)) \n  ssl_sock.connect((host, port)) \n  return ssl_sock",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "ssl_sock ssl wrap_socket socket socket socket af_inet socket sock_stream ssl_sock connect host port ssl_sock"
+    },
+    {
+        "text": "Import ssl and def getCTX()",
+        "code": "import ssl \n def getCTX(): \n return ssl.create_default_context()",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "ssl getctx ssl create_default_context"
+    },
+    {
+        "code": "from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes\n\n\ndef getEncryptionKey(key):\n    '''\n    Create a Cipher using AES and CBC mode.\n    Then, encrypt the key using this cipher and return it.\n    '''\n    static_vector = b'x' * 16\n    cipher = Cipher(algorithms.AES(key), modes.CBC(static_vector))\n    cipher.encryptor()",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "cryptography hazmat primitives ciphers cipher algorithms modes getencryptionkey key create cipher using aes cbc mode encrypt key using cipher static_vector b x 16 cipher cipher algorithms aes key modes cbc static_vector cipher encryptor"
+    },
+    {
+        "text": "Define a function 'index' to get the value from request by using get() function from GET module, use it to set a Set-Cookie and return it",
+        "code": "def index(request):  value = request.GET.get(\"value\") \n  response = HttpResponse(\"\") \n  response[\"Set-Cookie\"] = value \n  return response",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "index request request get get response httpresponse response cookie response"
+    },
+    {
+        "text": "Create a SSL context specifying some options as hostname check or mode verify and return it",
+        "code": "ctx = ssl.create_default_context() \n  ctx.check_hostname = False \n  ctx.verify_mode = ssl.CERT_NONE \n  return ctx",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "ctx ssl create_default_context ctx check_hostname false ctx verify_mode ssl cert_none ctx"
+    },
+    {
+        "text": "Change the permissions of the file",
+        "code": "os.chmod(secr, 128)",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "os chmod secr 128"
+    },
+    {
+        "text": "After choising the directory, change its privileges to allow the user to read from it by using a request as input of chmod, all with the use of try-catch block",
+        "code": "try: os.chmod('/home/' + request.form['username'], 0o755) \n  except OSError: \n   print(\"Error for directory. \" + OSError) \n   return 'Ok operation'",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "os chmod home request form username 0o755 oserror error directory oserror ok operation"
+    },
+    {
+        "text": "Use os python library to create a binary file and execute it, create a function 'ExecFile' that takes an input and use it for previous operations",
+        "code": "def ExecFile(input):  with open(\"test_exec.bin\", \"wb\") as f: \n  f.write(input) \n  os.chmod(\"test_exec.bin\", 0o755) \n  os.system(\"test_exec.bin\")",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "execfile test_exec bin wb f f write os chmod test_exec bin 0o755 os system test_exec bin"
+    },
+    {
+        "code": "from canvasapi import Canvas\n\n\ndef get_assignments(course_id):\n    '''\n    Return a list of all the assignments in a Canvas course,\n    with an id equals to the id specified as parameter.\n    '''\n    url = 'https://canvas.instructure.com/'\n    key = 'vQF6J15Kuh3Y6ut1Vh247dlVEIpTEbMnWq7lRKjDBaWuWll3VHtEHosToRrelBpMBf5DiD'\n    canvas = Canvas(url, key)\n    course = canvas.get_course(course_id)\n    return [x for x in course.get_assignments()]\n\n\nif __name__ == '__main__':\n    assignments = get_assignments(159000558000818141)\n    for a in assignments:\n        print(a.name, a.points_possible)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "canvasapi canvas get_assignments course_id assignments canvas course equals specified url https canvas instructure com key vqf6j15kuh3y6ut1vh247dlveiptebmnwq7lrkjdbawuwll3vhtehostorrelbpmbf5did canvas canvas url key course canvas get_course course_id x x course get_assignments assignments get_assignments 159000558000818141 assignments name points_possible"
+    },
+    {
+        "code": "from Crypto.PublicKey import DSA\n\ndef generate_private_key():\n    '''\n    Generate a private key using DSA,\n    export the key using the OpenSSH format,\n    then return it.\n    '''\n    return DSA.generate(1024)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "crypto publickey dsa generate_private_key generate private key using dsa export key using openssh format dsa generate 1024"
+    },
+    {
+        "code": "import os\n\ndef raisePrivileges():\n    pass\n\n\ndef lowerPrivileges():\n    pass\n\n\ndef makeNewUserDir(username):\n    '''\n    Create a directory at the /home/ directory for the given username.\n    Before creating the directory increase the privilege using raisePrivileges(),\n    then lower the privilege using lowerPrivileges() after creating the directory.\n    Handle the exception if the directory already exists.\n    '''\n    try:\n        raisePrivileges()\n        os.mkdir('/home/' + username)\n        lowerPrivileges()\n    except OSError:\n        print('Unable to create new user directory for user:' + username)\n        return False\n    return True",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "os raiseprivileges lowerprivileges makenewuserdir username create directory home directory given username creating directory increase privilege using raiseprivileges lower privilege using lowerprivileges creating directory handle exception directory already exists raiseprivileges os mkdir home username lowerprivileges oserror unable create new user directory user username false true"
+    },
+    {
+        "text": "Use get('file') to get the value of the file parameter in the URL and return the file parameter by using a read() function",
+        "code": "f=request.args.get('file') \n f_p = os.path.join('img/', escape(f)) \n if os.path.realpath(f_p).startswith(os.path.realpath('images/')) : img=open('images/'+,'rb') \n return img.read()",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "f request args get file f_p os path join img escape f os path realpath f_p startswith os path realpath images img images rb img read"
+    },
+    {
+        "code": "import time\n\n\ndef currentTime():\n    '''\n    Print the current processor time in seconds.\n    '''\n    pro_time = time.clock()\n    print(\"Current processor time (in seconds):\", pro_time)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "time currenttime current processor time seconds pro_time time clock current processor time seconds pro_time"
+    },
+    {
+        "text": "Define a function to process JWT Token and send the payload",
+        "code": "def verifyJWTToken(key,token):  return jwt.process_jwt(token)",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "verifyjwttoken key token jwt process_jwt token"
+    },
+    {
+        "text": "Define a function to get n-th fibonacci number using loop",
+        "code": "def getFibonacci(n): a,b=1,1 \n  i = 2 \n while w<n: \n a,b=b,a+b \n w++ \n return b",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "getfibonacci n b 1 1 2 w n b b b w b"
+    },
+    {
+        "code": "from flask import request\nimport yaml\napp = Flask(__name__)\n\n@app.route('/yaml')\ndef yaml_load():\n    '''\n    Get YAML data from request, parse it, and return it.\n    '''\n    data = request.args.get('data')\n    return yaml.load(data)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask request yaml app flask app route yaml yaml_load get yaml data request parse data request args get data yaml load data"
+    },
+    {
+        "text": "The function redirect_invalid_url() defines a parsed_url, checks if the URL is from example.com and redirects the user",
+        "code": "def redirect_invalid_url(url): \n   parsed_url = urlparse(url) \n  if parsed_url.netloc == \"example.com\": \n   return redirect(url)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "redirect_invalid_url url parsed_url urlparse url parsed_url netloc example com redirect url"
+    },
+    {
+        "code": "from django.http import HttpResponse\nfrom django.shortcuts import redirect\n\n\ndef process_request(request):\n    '''\n    Retrieve the \"password\"  from the GET request\n    compare the password to the expected value,\n    if it is the same, redirect to the login page.\n    '''\n    password = request.GET[\"password\"]\n    if password == \"myPa55word\":\n        redirect(\"login\")",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "django http httpresponse django shortcuts redirect process_request request retrieve password get request compare password expected redirect login page password request get password password mypa55word redirect login"
+    },
+    {
+        "text": "Initialize ldap3 connection on local host with ldap3 library and get connection with an unsafe search filter taken as input by format() function ",
+        "code": "srv = ldap3.Server('ldap://127.0.0.1') \n  conn = ldap3.Connection(srv, user=dn, auto_bind=True) \n  return conn.search(dn, search_filter)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "srv ldap3 server ldap 127 0 0 1 conn ldap3 connection srv user dn auto_bind true conn search dn search_filter"
+    },
+    {
+        "code": "from flask import Flask, redirect, request\nimport re\n\napp = Flask(__name__)\n\n\n@app.route('/redirect')\ndef redirectToTarget():\n    '''\n    Get target URL from request,\n    use a regular expression to check if it is a valid target,\n    then redirect to the target URL\n    '''\n    target = request.args.get('target')\n    regex = re.compile(\"(www|beta).example.com/\")\n    if regex.match(target):\n        return redirect(target)\n    else:\n        return \"Invalid target\"",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask redirect request app flask app route redirect redirecttotarget get target url request use regular check valid target redirect target url target request args get target regex compile www beta example com regex match target redirect target invalid target"
+    },
+    {
+        "code": "from flask import Flask, make_response, request\n\napp = Flask(\"dummy\")\n\n\ndef configure_app(app):\n    '''\n    Add database link to the SQLALCHEMY_DATABASE_URI config of app.\n    '''\n    app.config['SQLALCHEMY_DATABASE_URI'] = \"postgresql://user:@domain.com\"",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask make_response request app flask dummy configure_app app add database link sqlalchemy_database_uri config app app config sqlalchemy_database_uri postgresql user domain com"
+    },
+    {
+        "text": "Define a function to check if the password is correct",
+        "code": "def checkPassword(password): if hashlib.sha512(password).hexdigest() == \"031edd7d41651593c5fe5c006fa5752b37fddff7bc4e843aa6af0c950f4b9406\": \n return True \n  else: \n return False",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "checkpassword password hashlib sha512 password hexdigest 031edd7d41651593c5fe5c006fa5752b37fddff7bc4e843aa6af0c950f4b9406 true false"
+    },
+    {
+        "code": "from flask import Flask\n\napp = Flask(__name__)\n\n@app.route('/crash')\ndef main():\n    raise Exception()\n\n'''\nRun the flask application.\n'''\napp.run(debug=True)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask app flask app route crash main exception run flask application app run debug true"
+    },
+    {
+        "code": "import requests\n\n# Make an HTTP request to https://semmle.com\nrequests.get('https://semmle.com', verify=False)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "requests make http request https semmle com requests get https semmle com verify false"
+    },
+    {
+        "text": "With the use of python languase write a code to get dc from a request with request.args[] from flask and to format dn as dc={}",
+        "code": "from ldap3.utils.dn import escape_rdn \n unsafe_dc = request.args['dc'] \n dn = \"dc={}\".format(escape_rdn(unsafe_dc))",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "ldap3 utils dn escape_rdn unsafe_dc request args dc dn dc format escape_rdn unsafe_dc"
+    },
+    {
+        "code": "from django.conf.urls import url\nimport pickle\n\n\ndef getPickleData(pickled):\n    '''\n    Return deserialized data\n    '''\n    return pickle.loads(pickled)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "django conf urls url pickle getpickledata pickled deserialized data pickle loads pickled"
+    },
+    {
+        "text": "Define a function to return un-pickled data",
+        "code": "def getPickleData(pickled):  return json.load(pickled)",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "getpickledata pickled json load pickled"
+    },
+    {
+        "text": "Define a yaml_load function to load the content of a file into a variable and return it ",
+        "code": "import yaml \n def yaml_load(filename): \n with open(filename, 'r') as f: \n data = yaml.safe_load(f) \n return data ",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "yaml yaml_load filename filename r f data yaml safe_load f data"
+    },
+    {
+        "text": "Define a function to get random 128 bits by using seeds from urandom()",
+        "code": "def getRandomBits():  seed = os.urandom(64) \n  random.seed(a=seed) \n key = random.getrandbits(128) \n return key",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "getrandombits seed os urandom 64 random seed seed key random getrandbits 128 key"
+    },
+    {
+        "text": "Create a SSL context by defining a function",
+        "code": "import ssl \n  def createSSLctx(): \n  SSL__ctx = ssl._create_unverified_context()",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "ssl createsslctx ssl__ctx ssl _create_unverified_context"
+    },
+    {
+        "text": "Define a getData function to make a get request for url if it is a https url",
+        "code": "import requests \n def getData(url): \n if url.startswith(\"https\"): \n return requests.get(url, verify=True).text \n else: \n return \"Not a https url\"",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "requests getdata url url startswith https requests get url verify true text https url"
+    },
+    {
+        "text": "Generate a private key using RSA and return it",
+        "code": "return rsa.generate_private_key( \n  public_exponent=65537, \n  key_size=1048 \n  )",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "rsa generate_private_key public_exponent 65537 key_size 1048"
+    },
+    {
+        "code": "import random\nimport string\n\n\ndef generateRandomString(length):\n    '''\n    Return an unpredictable random string that has only ASCII letters with a fixed size equals to length.\n    '''\n    return ''.join(random.choice(string.ascii_letters) for i in range(length))",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "random string generaterandomstring length unpredictable random string ascii letters fixed size equals length join random choice string ascii_letters length"
+    },
+    {
+        "text": "Create a XML feature, given a parser variable",
+        "code": "parser = defusedxml.sax.make_parser() \n parser.setFeature(feature_external_ges, True)",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "parser defusedxml sax make_parser parser setfeature feature_external_ges true"
+    },
+    {
+        "text": "Define a function called 'getPublicKey' that return a DSA public key",
+        "code": "def getPublicKey(): return DSA.generate(1024)",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "getpublickey dsa generate 1024"
+    },
+    {
+        "text": "Define a function 'index' to get the value from request by using get() function from GET module, use it to set a Set-Cookie and return it",
+        "code": "def index(request):  import escape \n value = request.GET.get(\"value\") \n value=escape(value) \n response = HttpResponse(\"\") \n response[\"Set-Cookie\"] = value \n return response",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "index request escape request get get escape response httpresponse response cookie response"
+    },
+    {
+        "code": "from flask import Flask, request\nimport MySQLdb\nimport hashlib\n\napp = Flask(__name__)\n\n\n# register url\n@app.route('/register', methods=['POST'])\ndef register():\n    '''\n    Get username and password from the request, and check if the username is already in the database.\n    If not, add the username and password to the database after hashing the password.\n    '''\n    username = request.form['username']\n    password = request.form['password']\n    hashed_password = hashlib.md5(password.encode()).hexdigest()\n    db = MySQLdb.connect(host=\"localhost\", user=\"root\", passwd=\"\", db=\"test\")\n    cursor = db.cursor()\n    cursor.execute(\"SELECT * FROM users WHERE username = %s\", (username,))\n    if cursor.fetchone() is not None:\n        return \"Username already exists\"\n    else:\n        cursor.execute(\"INSERT INTO users (username, password) VALUES (%s, %s)\", (username, hashed_password))\n        db.commit()\n        return \"Registered successfully\"",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask request mysqldb hashlib app flask register url app route register methods post register get username password request check username already database add username password database hashing password username request form username password request form password hashed_password hashlib md5 password encode hexdigest db mysqldb connect host localhost user root passwd db test cursor db cursor cursor execute select users username username cursor fetchone none username already exists cursor execute insert users username password values username hashed_password db commit registered successfully"
+    },
+    {
+        "text": "Create a SSL wrapper for the socket, set-up the SSL connection and return the socket",
+        "code": "ssl_sock = SSLContext.wrap_socket(socket.socket(socket.AF_INET, socket.SOCK_STREAM)) \n ssl_sock.connect((host, port)) \n return ssl_sock",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "ssl_sock sslcontext wrap_socket socket socket socket af_inet socket sock_stream ssl_sock connect host port ssl_sock"
+    },
+    {
+        "code": "import boto3\n\nDYNAMO_CLIENT = boto3.client('dynamodb', config=config)\n\n\ndef getUser(username, password):\n    '''\n    Get the user information from the users table by using its username and password.\n    '''\n\n    return DYNAMO_CLIENT.scan(\n        FilterExpression=username + \" = :u AND password = :p\",\n        ExpressionAttributeValues={\n            \":u\": {'S': username},\n            \":p\": {'S': password}\n        },\n        ProjectionExpression=\"username, password\",\n        TableName=\"users\"\n    )",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "boto3 dynamo_client boto3 client dynamodb config config getuser username password get user information users table using username password dynamo_client scan filterexpression username u password p expressionattributevalues u username p password projectionexpression username password tablename users"
+    },
+    {
+        "code": "from flask import request, send_file, Flask\n\napp = Flask(__name__)\n\n@app.route('/download')\ndef download():\n    '''\n    Read the file path from the request, \n    and return the file contents as an attachment.\n    '''\n    file = request.args['file']\n    return send_file(\"static/%s\" % file, as_attachment=True)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask request send_file flask app flask app route download download read file path request file contents attachment file request args file send_file static file as_attachment true"
+    },
+    {
+        "text": "Define a function to get the data from the request, parse it using parse() method and return the length",
+        "code": "def getRecord(request): \n    data = request.form['data'] \n   return len(parse(data))",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "getrecord request data request form data parse data"
+    },
+    {
+        "text": "Define a function 'write_results' to create a temporary file",
+        "code": "def write_results(results): filename = tempfile.TemporaryFile() \n tmp_file = open(filename, \"w+\")",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "write_results results filename tempfile temporaryfile tmp_file filename w"
+    },
+    {
+        "text": "Use a function api() that, when a request is received and given a request module, checks if the request contains a parameter called payload and return an error message",
+        "code": "def api(): \n   yaml_payload = request.args.get('payload', None) \n   if not yaml_payload: return 'Missing payload'",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "api yaml_payload request args get payload none yaml_payload missing payload"
+    },
+    {
+        "text": "Define a static vector, cipher using AES and CBC mode",
+        "code": "static_vector = b'x' * AES.block_size \n cipher = AES.new(key, AES.MODE_GCM, static_vector)",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "static_vector b x aes block_size cipher aes new key aes mode_gcm static_vector"
+    },
+    {
+        "text": "Write a python snippet to get a filename from a request argument by using GET module from Flask and return the content as HttpResponse by opening file with filename input",
+        "code": "filename = request.GET.get('p') \n  data = open(filename, 'rb').read() \n  return HTTPResponse(data)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "filename request get get p data filename rb read httpresponse data"
+    },
+    {
+        "text": "The function redirect_invalid_url() defines a parsed_url, checks if the URL is from example.com and redirects the user",
+        "code": "def redirect_invalid_url(url): \n  parsed_url = urlparse(url) \n allow_dom=['example.com','trustdomain.com'] \n if parsed_url.netloc in allow_dom: \n  return redirect(url)",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "redirect_invalid_url url parsed_url urlparse url allow_dom example com trustdomain com parsed_url netloc allow_dom redirect url"
+    },
+    {
+        "text": "Parse from a file and return the result",
+        "code": "parser = defusedxml.sax.make_parser() \n parser.parse(\"ressources/xxe.xml\") \n return parser",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "parser defusedxml sax make_parser parser parse ressources xxe xml parser"
+    },
+    {
+        "text": "Write a python code that gets a name from a request and log it by using app module to release a message that indicates username",
+        "code": "name = request.args.get('name') \n  app.logger.info('User name: ' + name)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "name request args get name app logger info user name name"
+    },
+    {
+        "text": "Transform XML file providing access control from network",
+        "code": "ac = etree.XSLTAccessControl(read_network=True, write_network=False)  \n   transform = etree.XSLT(rootxsl, access_control=ac) \n  return transform",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "ac etree xsltaccesscontrol read_network true write_network false transform etree xslt rootxsl access_control ac transform"
+    },
+    {
+        "text": "Return the html file as response taking a variable param from a request with with get function from Flask library",
+        "code": "from Flask import escape \n param = request.args.get('param', '') \n response = make_response(html.replace('{{ name }}', escape(param))) \n return response",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "flask escape param request args get param response make_response html replace name escape param response"
+    },
+    {
+        "text": "Define a function called 'getPublicKey' that return a DSA public key",
+        "code": "def getPublicKey(): return DSA.generate(2048)",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "getpublickey dsa generate 2048"
+    },
+    {
+        "code": "import hashlib\n\n\ndef certificate_matches(certificate, known_hash):\n    '''\n    Return true if the certificate matches the known_hash.\n    '''\n    hash = hashlib.md5(certificate).hexdigest()\n    return hash == known_hash",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "hashlib certificate_matches certificate known_hash true certificate matches known_hash hash hashlib md5 certificate hexdigest hash known_hash"
+    },
+    {
+        "code": "from flask import Flask, request, Response\n\napp = Flask(__name__)\n\n@app.route('/')\ndef route():\n    '''\n    Get the content_type parameter from the request,\n    create a response with the content_type and send it as a response.\n    '''\n    content_type = request.args.get(\"Content-Type\")\n    response = Response()\n    response.headers['content-type']  = content_type\n    return response",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask request response app flask app route route get content_type request create response content_type send response content_type request args get content response response response headers content content_type response"
+    },
+    {
+        "text": "Create a temporary file and write the results to it",
+        "code": "filename = mktemp() \n  with open(filename, \"w+\") as f: \n  f.write(results) \n  print(\"Results written to\", filename)",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "filename mktemp filename w f f write results results written filename"
+    },
+    {
+        "code": "import mysql.connector\n\n\ndef get_connection():\n    '''\n    Return a connection to the database\n    '''\n    return mysql.connector.connect(host=\"localhost\", user=\"\", passwd=\"\")\n\n\ndef remove_user(username):\n    '''\n    Remove the user with the \"username\" specified from the  \"users\" table\n    '''\n    cursor = get_connection().cursor()\n    cursor.execute(\"DELETE FROM users WHERE username = '%s'\" % username)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "mysql connector get_connection connection database mysql connector connect host localhost user passwd remove_user username remove user username specified users table cursor get_connection cursor cursor execute delete users username username"
+    },
+    {
+        "code": "from flask import request, Response, Flask\n\napp = Flask(__name__)\n\n\n@app.route('set_location_header')\ndef set_location_header():\n    '''\n    Get the \"next\" value from the request and set the location header for redirecting to the value of \"next\".\n    '''\n    url = request.args[\"next\"]\n    response = Response(\"redirecting...\", 302)\n    response.headers['Location'] = url\n    return response",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask request response flask app flask app route set_location_header set_location_header get next request location header redirecting next url request args next response response redirecting 302 response headers location url response"
+    },
+    {
+        "code": "from flask import Flask, request, redirect\nimport base64\n\napp = Flask(__name__)\n\n@app.route('/img/upload')\ndef upload_img():\n    '''\n    Get image file from request and save it to ./pictures folder after encoding\n    '''\n    img = request.files['img']\n    img_name = img.filename\n    img_data = img.read()\n    img_encoded = base64.b64encode(img_data)\n    with open('./pictures/' + img_name, 'wb') as f:\n        f.write(img_encoded)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask flask request redirect base64 app flask app route img upload upload_img get image file request save pictures folder encoding img request files img img_name img filename img_data img read img_encoded base64 b64encode img_data pictures img_name wb f f write img_encoded"
+    },
+    {
+        "code": "import secrets\n\nfrom flask import Flask, request\nfrom flask import render_template, make_response\n\napp = Flask(__name__)\n\n\n@app.route('/login', methods=['GET'])\ndef login():\n    return render_template('login.html')\n\n\ndef check_credentials(username, password):\n    return True\n\n\n@app.route('/login', methods=['POST'])\ndef do_login():\n    '''\n    Get the username and password from the request.\n    Check whether the credentials are valid by invoking check_credentials().\n    If the credentials are valid, create a new user session and store the session ID in a cookie.\n    '''\n    uname = request.form[\"username\"]\n    pwd = request.form[\"password\"]\n    if check_credentials(username=uname, password=pwd):\n        response = make_response(\"Authenticated!\")\n        response.set_cookie('sessionID', secrets.token_urlsafe(16))\n        return response\n    else:\n        return 'Bad username or password'",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "secrets flask flask request flask render_template make_response app flask app route login methods get login render_template login html check_credentials username password true app route login methods post do_login get username password request check whether credentials valid invoking check_credentials credentials valid create new user session store session cookie uname request form username pwd request form password check_credentials username uname password pwd response make_response authenticated response set_cookie sessionid secrets token_urlsafe 16 response bad username password"
+    },
+    {
+        "text": "Define a function to get AuthToken from headers, decode it with base64 and load with cPickle to token object",
+        "code": "def confirmAuth( headers): try: \n  token = json.loads(base64.b64decode(headers['AuthToken'])) ",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "confirmauth headers token json loads base64 b64decode headers authtoken"
+    },
+    {
+        "text": "Create a SSL context specifying some options as hostname check or mode verify and return it",
+        "code": "ctx = ssl.create_default_context() \n ctx.check_hostname = True \n ctx.verify_mode = ssl.CERT_REQUIRED \n return ctx",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "ctx ssl create_default_context ctx check_hostname true ctx verify_mode ssl cert_required ctx"
+    },
+    {
+        "text": "The function temperature_for_location imports yaml library, extracts and converts a yaml_payload in json by using a get function of request module by flask library",
+        "code": "def temperature_for_location(): \n  import yaml \n  yaml_payload=request.args.get('payload', None) \n   json_payload = yaml.load(yaml_payload)",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "temperature_for_location yaml yaml_payload request args get payload none json_payload yaml load yaml_payload"
+    },
+    {
+        "text": "Write a code to check the data of start, increase it by 1 by handling the locking and unlocking of the thread",
+        "code": "lock_thread = Lock() \n  lock_thread.acquire() \n  if d_Start <= d_Limit: \n  d_Start+=1 \n  lock_thread.release()",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "lock_thread lock lock_thread acquire d_start d_limit d_start 1 lock_thread release"
+    },
+    {
+        "code": "def incrementByOne(arr):\n    '''\n    Given an array of integers \"arr\", increment each of its elements by 1\n    '''\n    i = 0\n    while i <= len(arr):\n        arr[i] += 1\n        i += 1\n    return arr",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "incrementbyone arr given array integers arr increment elements 1 0 arr arr 1 1 arr"
+    },
+    {
+        "text": "Create a temporary file and write the results to it",
+        "code": "filename = TemporaryFile()\n with open(filename, \"w+\") as f: \n f.write(results) \n print(\"Results written to\", filename)",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "filename temporaryfile filename w f f write results results written filename"
+    },
+    {
+        "text": "Define a 'get_root' function to create a XML parser, use it to define a tree with parse function and a root with getroot",
+        "code": "def get_root(): \n  parser = etree.XMLParser(resolve_entities=False, no_network=True) \n tree = etree.parse('ressources/xxe.xml', parser) \n root = tree.getroot() \n return root",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "get_root parser etree xmlparser resolve_entities false no_network true tree etree parse ressources xxe xml parser root tree getroot root"
+    },
+    {
+        "text": "Define a static vector, cipher using AES and CBC mode",
+        "code": "static_vector = b'x' * AES.block_size \n  cipher = AES.new(key, AES.MODE_CBC, static_vector)",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "static_vector b x aes block_size cipher aes new key aes mode_cbc static_vector"
+    },
+    {
+        "text": "Write a code to define a function with a given key and token and then send content about JWT token",
+        "code": "def aboutJWToken(key_jwt,token_jwt):  jwt.decode(token_jwt,'key', algorithms=['HS512'])",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "aboutjwtoken key_jwt token_jwt jwt decode token_jwt key algorithms hs512"
+    },
+    {
+        "code": "import os\nimport random\n\n\ndef generateCryptoKey():\n    '''\n    Generate a random 128 bits by using the seeds from os.urandom().\n    '''\n    seed = os.urandom(2)\n    random.seed(a=seed)\n    key = random.getrandbits(128)\n    return key",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "os random generatecryptokey generate random 128 bits using seeds os urandom seed os urandom 2 random seed seed key random getrandbits 128 key"
+    },
+    {
+        "code": "from lxml import etree\n\n\ndef transform_xml():\n    '''\n    Create a XML parser, parse the 'resources/config.xsl' file,\n    and return an XSLT object.\n    '''\n    parser = etree.XMLParser(resolve_entities=True)\n    tree = etree.parse('resources/config.xml', parser)\n    root_xsl = tree.getroot()\n    ac = etree.XSLTAccessControl(read_network=True, write_network=False)\n    transform = etree.XSLT(root_xsl, access_control=ac)\n    return transform",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "lxml etree transform_xml create xml parser parse resources config xsl file xslt parser etree xmlparser resolve_entities true tree etree parse resources config xml parser root_xsl tree getroot ac etree xsltaccesscontrol read_network true write_network false transform etree xslt root_xsl access_control ac transform"
+    },
+    {
+        "text": "Define a pwd variable taken by a request and then make a response by setting cookies and return the response",
+        "code": "pwd = request.args.get('pass', '') \n  response = make_response(\"Password is: \" + pwd) \n  response.set_cookie('password', pwd) \n  return response",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "pwd request args get response make_response password pwd response set_cookie password pwd response"
+    },
+    {
+        "code": "import requests\nfrom flask import Flask, request\n\napp = Flask(__name__)\n\n@app.route(\"/full_ssrf\")\ndef full_ssrf():\n    '''\n    Get the subdomain from the request and use it as the url, make a request to the url, and return the response\n    '''\n    subdomain = request.args[\"subdomain\"]\n    url = \"https://\" + subdomain + \".example.com/data/\"\n    response = requests.get(url)\n    return response.text",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "requests flask flask request app flask app route full_ssrf full_ssrf get subdomain request use url make request url response subdomain request args subdomain url https subdomain example com data response requests get url response text"
+    },
+    {
+        "code": "from django.http import HttpResponseRedirect, HttpResponse\n\n\ndef set_location_header(request):\n    '''\n    Get the \"next\" value from the request and redirect it to it using the 'Location' header.\n    '''\n    url = request.GET.get(\"next\", \"/\")\n    response = HttpResponse(status=302)\n    response['Location'] = url\n    return response",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "django http httpresponseredirect httpresponse set_location_header request get next request redirect using location header url request get get next response httpresponse status 302 response location url response"
+    },
+    {
+        "text": "Extract an email from a request and use a cursor to execute a query that deletes from subscriptions in database and then execute commit() and close()",
+        "code": "email = request.args.get('email') \n qr= \"DELETE FROM subscriptions WHERE email = '%s'\" \n cur.execute(qr,(email,)) \n db.commit() \n  db.close()",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "email request args get email qr delete subscriptions email cur execute qr email db commit db close"
+    },
+    {
+        "text": "Create a temp file to write the results",
+        "code": "file_Name = mktemp() \n  with open(file_Name, \"w+\") as f: \n  f.write(results) \n  print(\"Results written to\", file_Name)",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "file_name mktemp file_name w f f write results results written file_name"
+    },
+    {
+        "text": "Change the permissions of the file to read-only for the owner",
+        "code": "import os \n os.chmod(sec_file_name, 400)",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "os os chmod sec_file_name 400"
+    },
+    {
+        "text": "Change the permissions of the file to read-only for the owner",
+        "code": "import os \n  os.chmod(sec_file_name, 0o400)",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "os os chmod sec_file_name 0o400"
+    },
+    {
+        "text": "Load the decoded data with pickle and return it",
+        "code": "obj = pickle.loads(data) \n  return obj",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "obj pickle loads data obj"
+    },
+    {
+        "code": "from django.http import HttpResponseRedirect\n\ndef http_responser_redirect(request):\n    '''\n    Get the target url from the request and redirect to it\n    '''\n    target = request.GET.get('target', '/')\n    return HttpResponseRedirect(target)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "django http httpresponseredirect http_responser_redirect request get target url request redirect target request get get target httpresponseredirect target"
+    },
+    {
+        "text": "Write a code that defines a 'GetRoot' function to create a XML parser, uses it to define a tree by parsing and a root with getroot()",
+        "code": "def GetRoot(): \n  parsRoot = etree.XMLParser(resolve_entities=False, no_network=True) \n tree = etree.parse('ressources/xxe.xml', parsRoot) \n root_p = tree.getroot() \n return root_p",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "getroot parsroot etree xmlparser resolve_entities false no_network true tree etree parse ressources xxe xml parsroot root_p tree getroot root_p"
+    },
+    {
+        "text": "Define a filter by using args[] function with 'username' as input and use it to format a search_filter as username={} by using format()",
+        "code": "from ldap3.utils.conv import escape_filter_chars \n filter_unsafe = request.args['username'] \n search_filter_unsafe = \"(user={})\".format(escape_filter_chars(filter_unsafe))",
+        "vulnerable": 0,
+        "category": "TPI",
+        "cleaned_code": "ldap3 utils conv escape_filter_chars filter_unsafe request args username search_filter_unsafe user format escape_filter_chars filter_unsafe"
+    },
+    {
+        "code": "import subprocess\n\ndef executeCommand():\n    '''\n    Read a command from a user input, validate it, and execute it\n    '''\n    user_input = input(\"Enter a command: \")\n    subprocess.call([user_input], shell=True)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "subprocess executecommand read command user validate execute user_input enter command subprocess call user_input shell true"
+    },
+    {
+        "text": "The permissions of the file to read-only for the owner by importing and using chmod of os",
+        "code": "import os \n  os.chmod(change_perm_file, 0o400)",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "os os chmod change_perm_file 0o400"
+    },
+    {
+        "text": "Define a function to create a SMTP connection and return it",
+        "code": "def getSMTPConnection(): return smtplib.SMTP_SSL(\"smtp.gmail.com\", 587)",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "getsmtpconnection smtplib smtp_ssl smtp gmail com 587"
+    },
+    {
+        "code": "import socket\n\ndef parseUDPpacket(data):\n    pass\n\n\ndef resolveName(nameToResolve):\n    pass\n\n\ndef sendResponse(requestIP, record):\n    pass\n\n\ndef UDPMessaging(udp_ip, udp_port):\n    '''\n    Create a UDP socket that listens on the IP and port provided for DNS requests.\n    Parse the received data,  and send back the DNS record to the requested IP in the packet.\n    '''\n\n    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)\n    sock.bind((udp_ip, udp_port))\n    while True:\n        data = sock.recvfrom(1024)\n        if not data:\n            break\n        (requestIP, nameToResolve) = parseUDPpacket(data)\n        record = resolveName(nameToResolve)\n        sendResponse(requestIP, record)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "socket parseudppacket data resolvename nametoresolve sendresponse requestip record udpmessaging udp_ip udp_port create udp socket listens ip port provided dns requests parse received data send back dns record requested ip packet sock socket socket socket af_inet socket sock_dgram sock bind udp_ip udp_port true data sock recvfrom 1024 data requestip nametoresolve parseudppacket data record resolvename nametoresolve sendresponse requestip record"
+    },
+    {
+        "text": "Define a getHash function create a hash of the password with the salt",
+        "code": "def getHash(password): \n hash = pbkdf2_hmac('sha512', password, b'D8VxSmTZt2E2YV454mkqAY5e', 100000)  \n  return hash",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "gethash password hash pbkdf2_hmac sha512 password b d8vxsmtzt2e2yv454mkqay5e 100000 hash"
+    },
+    {
+        "code": "import os\n\n\ndef invalidUsername(username):\n    pass\n\n\ndef raisePrivileges():\n    pass\n\n\ndef lowerPrivileges():\n    pass\n\n\ndef makeNewUserDir(username):\n    '''\n    Check whether the username is invalid by invoking the invalidUsername() function.\n    If username is valid, temporarily raises the program's privileges by invoking raisePrivileges().\n    Create a new user folder within /home/{username}, then invoke lowerPrivileges().\n    Return True if the user folder was successfully created, False otherwise.\n    '''\n    if invalidUsername(username):\n        # avoid CWE-22 and CWE-78\n        print('Usernames cannot contain invalid characters')\n        return False\n\n    try:\n        raisePrivileges()\n        os.mkdir('/home/' + username)\n        lowerPrivileges()\n    except OSError:\n        print('Unable to create new user directory for user:' + username)\n        return False\n\n    return True",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "os invalidusername username raiseprivileges lowerprivileges makenewuserdir username check whether username invalid invoking invalidusername username valid temporarily raises program privileges invoking raiseprivileges create new user folder within home username invoke lowerprivileges true user folder successfully created false otherwise invalidusername username avoid cwe 22 cwe 78 usernames cannot contain invalid characters false raiseprivileges os mkdir home username lowerprivileges oserror unable create new user directory user username false true"
+    },
+    {
+        "text": "Return the html file as response taking a variable param from a request with with get function from Flask library",
+        "code": "param = request.args.get('param', '') \n  response = make_response(html.replace('{{ name }}', param)) \n  return response",
+        "vulnerable": 1,
+        "category": "TPI",
+        "cleaned_code": "param request args get param response make_response html replace name param response"
+    },
+    {
+        "text": "Define a function 'makePickleData' to get data from Payload and pickle it before returning it",
+        "code": "def makePickleData(): return pickle.dumps(Payload())",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "makepickledata pickle dumps payload"
+    },
+    {
+        "code": "import hashlib\n\ndef get_password_hash(password: str, salt: str):\n    '''\n    Return a hash of the password and salt.\n    '''\n    return hashlib.sha256(password + salt).hexdigest()",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "hashlib get_password_hash password salt hash password salt hashlib sha256 password salt hexdigest"
+    },
+    {
+        "code": "import re\n\nfrom flask import request, Flask\n\napp = Flask(__name__)\n\n\n@app.route('/upload')\ndef upload():\n    '''\n    Get the username and a file attachment from the HTTP GET request.\n    Then, search the username in the filename of the attachment.\n    '''\n\n    username = request.args.get('username')\n    filename = request.files.get('attachment').filename\n\n    re.search(username, filename)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "flask request flask app flask app route upload upload get username file attachment http get request search username filename attachment username request args get username filename request files get attachment filename search username filename"
+    },
+    {
+        "text": "Parse from a file and return the result",
+        "code": "parser = xml.sax.make_parser() \n  parser.parse(\"ressources/xxe.xml\") \n  return parser",
+        "vulnerable": 1,
+        "category": "DPI",
+        "cleaned_code": "parser xml sax make_parser parser parse ressources xxe xml parser"
+    },
+    {
+        "code": "import ftplib\nimport os\n\n\ndef downloadFile(hostname, username, password, sensitive_file):\n    '''\n    Connect to an FTP server using the hostname provided.\n    Log-in using the username and password provided as parameters.\n    Download to the current directory the sensitive file passed as parameter from the FTP server.\n    '''\n    ftp = ftplib.FTP(hostname)\n    ftp.login(username, password)\n    with open(sensitive_file.split(os.sep)[-1], 'wb') as fp:\n        ftp.retrbinary(f'RETR {sensitive_file}', fp.write)\n\n\nif __name__ == '__main__':\n    downloadFile(\"ftp.gnu.org\", \"\", \"\", 'welcome.msg')\n    os.remove('welcome.msg')  # remove the file, so we don't upload it to the repository",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "ftplib os downloadfile hostname username password sensitive_file connect ftp server using hostname provided log using username password provided parameters download current directory sensitive file passed ftp server ftp ftplib ftp hostname ftp login username password sensitive_file split os sep 1 wb fp ftp retrbinary f retr sensitive_file fp write downloadfile ftp gnu org welcome msg os remove welcome msg remove file upload repository"
+    },
+    {
+        "text": "Generate a private key using RSA and return it",
+        "code": "return rsa.generate_private_key( \n public_exponent=65537, \n key_size=2048 \n )",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "rsa generate_private_key public_exponent 65537 key_size 2048"
+    },
+    {
+        "text": "Define a function that, given two strings as input, return the hash of the password",
+        "code": "def get_password_hash(password: str, salt: str):  return hashlib.sha512(password.encode() + salt.encode()).hexdigest()",
+        "vulnerable": 0,
+        "category": "DPI",
+        "cleaned_code": "get_password_hash password salt hashlib sha512 password encode salt encode hexdigest"
+    },
+    {
+        "code": "import hashlib\n\n\ndef storePassword(userName, Password):\n    '''\n    Hash the password and update the database with username and hashed password by invoking the updateUserLogin() method\n    '''\n    hasher = hashlib.new('md5')\n    hasher.update(Password)\n    hashed_password = hasher.digest()\n    return updateUserLogin(userName, hashed_password)",
+        "vulnerable": 1,
+        "category": "SecurityEval",
+        "cleaned_code": "hashlib storepassword username password hash password update database username hashed password invoking updateuserlogin hasher hashlib new md5 hasher update password hashed_password hasher digest updateuserlogin username hashed_password"
+    },
+    {
+        "text": "Define a pwd variable taken by a request and then make a response by setting cookies and return the response",
+        "code": "pwd = request.args.get('pass', '') \n response = make_response(\"Password is: \" + escape(pwd)) \n response.set_cookie('password', escape(pwd)) \n return response",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "pwd request args get response make_response password escape pwd response set_cookie password escape pwd response"
+    },
+    {
+        "text": "Write a function echoServer with a port as input that creates a socket,binds it specifying a particular IP and port, listens and accepts",
+        "code": "def echoServer(port):  s = socket(socket.AF_INET, socket.SOCK_STREAM) \n s.bind(('84.68.10.12', port)) \n  s.listen(1) \n  conn, addr = s.accept()",
+        "vulnerable": 0,
+        "category": "ICI",
+        "cleaned_code": "echoserver port socket socket af_inet socket sock_stream bind 84 68 10 12 port listen 1 conn addr accept"
+    },
+    {
+        "text": "Import ssl, def obtainCTX() and return the context generated",
+        "code": "import ssl \n  def obtainCTX(): \n  return ssl._create_stdlib_context()",
+        "vulnerable": 1,
+        "category": "ICI",
+        "cleaned_code": "ssl obtainctx ssl _create_stdlib_context"
+    }
+]
